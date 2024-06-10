@@ -25,6 +25,7 @@ namespace Ex03.GarageLogic
         public float CurrentEnergy
         {
             get { return m_CurrentEnergy; }
+            set { m_CurrentEnergy = value; }
         }
 
         protected void AddFuelOrCharge(float i_EnergyToAdd)

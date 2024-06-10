@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    internal class Car : Vehicle
+    public class Car : Vehicle
     {
         private const int k_NumberOfWheelsInCar = 5;
         private const float k_MaxCarWheelPressure = 31f;

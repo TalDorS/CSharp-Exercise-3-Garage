@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
             MaxFuel = k_MaxCarFuel;
         }
 
-        public bool IsDangerousMaterials
+        public bool IsCarryingDangerousMaterials
         {
             get { return m_IsDangerousMaterials; }
             set { m_IsDangerousMaterials = value;}

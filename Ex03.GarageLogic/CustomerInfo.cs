@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
     {
         private string m_Name;
         private string m_PhoneNumber;
-        private eCarStatus k_CarStatus = eCarStatus.InRepair;
+        private eVehicleStatus k_CarStatus = eVehicleStatus.InRepair;
 
         public CustomerInfo(string i_Name, string i_PhoneNumber) 
         {
@@ -19,7 +19,7 @@ namespace Ex03.GarageLogic
             m_PhoneNumber = i_PhoneNumber;
         }
 
-        public eCarStatus CarStatus
+        public eVehicleStatus CarStatus
         {
             get { return k_CarStatus; }
             set { k_CarStatus = value; }

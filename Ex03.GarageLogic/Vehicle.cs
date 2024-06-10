@@ -14,11 +14,11 @@ namespace Ex03.GarageLogic
         private int m_NumOfWheels;
         private Engine m_Engine;
         private List<Wheel> m_Wheels;
-        private float r_MaxFuel;
-        private float r_MaxCharge;
+        private float m_MaxFuel;
+        private float m_MaxCharge;
         //private eVehicleType m_VehicleType; not sure if needed, can be checked with 'is' keyword
         private eFuelType m_FuelType;
-        private float r_MaxWheelPressure;
+        private float m_MaxWheelPressure;
 
         public Engine Engine
         {
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
 
         public float MaxWheelPressure
         {
-            get { return r_MaxWheelPressure; }
+            get { return m_MaxWheelPressure; }
         }
 
         public eFuelType FuelType
@@ -45,12 +45,12 @@ namespace Ex03.GarageLogic
 
         public float MaxFuel
         {
-            get { return r_MaxFuel; }
+            get { return m_MaxFuel; }
         }
 
         public float MaxCharge
         {
-            get { return r_MaxCharge; }
+            get { return m_MaxCharge; }
         }
 
         public List<Wheel> Wheels

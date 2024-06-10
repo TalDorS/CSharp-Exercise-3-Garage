@@ -17,6 +17,16 @@ namespace Ex03.GarageLogic
             r_MaxAmountOfEnergy = i_MaxAmountOfEnergy;
         }
 
+        public float MaxAmountOfEnergy
+        {
+            get { return r_MaxAmountOfEnergy; }
+        }
+
+        public float CurrentEnergy
+        {
+            get { return m_CurrentEnergy; }
+        }
+
         protected void AddFuelOrCharge(float i_EnergyToAdd)
         {
             float newEnergy = m_CurrentEnergy + i_EnergyToAdd;

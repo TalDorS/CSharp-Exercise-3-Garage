@@ -54,7 +54,7 @@ namespace Ex03.GarageLogic
             return newVehicle;
         }
 
-        private static List<Wheel> CreateWheels(int i_NumOfWheels, string i_ManufacturerName, float i_CurrentAirPressure, float i_MaxAirPressure)
+        public static List<Wheel> CreateWheels(int i_NumOfWheels, string i_ManufacturerName, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
             List<Wheel> wheels = new List<Wheel>();
 

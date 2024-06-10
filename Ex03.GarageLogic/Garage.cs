@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
             return m_Vehicles[i_LicenseNumber];
         }
 
-        public void ChangeVehicleState(string i_LicenseNumber, eCarStatus i_Status) // 3
+        public void ChangeVehicleState(string i_LicenseNumber, eVehicleStatus i_Status) // 3
         {
             if (!IsCarInGarage(i_LicenseNumber))
             {
@@ -99,8 +99,8 @@ namespace Ex03.GarageLogic
             currentVehicle = m_Vehicles[i_LicenseNumber];
             currentCustomer = m_CustomersInfo[i_LicenseNumber];
 
-            return string.Format("License Number: {0}{1}Model Name: {2}{1}{3}{1}{4}{1}{5}{1}{6}{1}" 
-                , i_LicenseNumber, Environment.NewLine, currentVehicle.ModelName, currentCustomer.ToString(), currentVehicle.Wheels[0].ToString(), currentVehicle.Engine.ToString(), currentVehicle.ToString())
+            return string.Format("License Number: {0}{1}Model Name: {2}{1}{3}{1}{4}{1}{5}{1}{6}{1}"
+                , i_LicenseNumber, Environment.NewLine, currentVehicle.ModelName, currentCustomer.ToString(), currentVehicle.Wheels[0].ToString(), currentVehicle.Engine.ToString(), currentVehicle.ToString());
         }
     }
 }

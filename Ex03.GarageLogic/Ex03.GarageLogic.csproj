@@ -44,7 +44,7 @@
     <Compile Include="ElectricEngine.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Enums\eCarColor.cs" />
-    <Compile Include="Enums\eCarStatus.cs" />
+    <Compile Include="Enums\eVehicleStatus.cs" />
     <Compile Include="Enums\eFuelType.cs" />
     <Compile Include="Enums\eLicenseType.cs" />
     <Compile Include="Enums\eVehicleType.cs" />

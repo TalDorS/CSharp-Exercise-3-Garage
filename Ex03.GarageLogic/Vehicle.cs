@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
         private List<Wheel> m_Wheels;
         private float m_MaxFuel;
         private float m_MaxCharge;
-        //private eVehicleType m_VehicleType; not sure if needed, can be checked with 'is' keyword
+        private eVehicleType m_VehicleType;
         private eFuelType m_FuelType;
         private float m_MaxWheelPressure;
 
@@ -69,6 +69,12 @@ namespace Ex03.GarageLogic
         {
             get { return m_LicenseNumber; }
             set { m_LicenseNumber = value; }
+        }
+
+        public eVehicleType VehicleType
+        {
+            get { return m_VehicleType; }
+            set { m_VehicleType = value; }
         }
     }
 }

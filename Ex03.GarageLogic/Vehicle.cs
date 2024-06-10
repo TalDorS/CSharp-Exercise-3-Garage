@@ -35,6 +35,7 @@ namespace Ex03.GarageLogic
         public float MaxWheelPressure
         {
             get { return m_MaxWheelPressure; }
+            set { m_MaxWheelPressure = value; }
         }
 
         public eFuelType FuelType
@@ -46,11 +47,13 @@ namespace Ex03.GarageLogic
         public float MaxFuel
         {
             get { return m_MaxFuel; }
+            set { m_MaxFuel = value; }
         }
 
         public float MaxCharge
         {
             get { return m_MaxCharge; }
+            set { m_MaxCharge = value; }
         }
 
         public List<Wheel> Wheels

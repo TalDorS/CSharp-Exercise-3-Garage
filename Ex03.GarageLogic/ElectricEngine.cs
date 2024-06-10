@@ -9,16 +9,13 @@ namespace Ex03.GarageLogic
 {
     internal class ElectricEngine : Engine
     {
-        private const int k_MinutesInHour = 60;
         private eFuelType m_FuelType;
 
         public ElectricEngine(float i_MaxCharge) : base(i_MaxCharge) { }
 
-        public void AddCharge(float i_MinutesToAdd)
+        public void AddCharge(float i_HoursToAdd)
         {
-            float minutesToAdd = (float)(i_MinutesToAdd / k_MinutesInHour);
-
-            AddFuelOrCharge(minutesToAdd);
+            AddFuelOrCharge(i_HoursToAdd);
         }
 
         public override string ToString()

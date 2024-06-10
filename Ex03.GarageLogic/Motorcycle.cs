@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         private const float k_MaxMotorcycleWheelPressure = 33f;
         private const float k_MaxMotorcycleFuel = 5.5f;
         private const float k_MaxMotorcycleCharge = 2.5f;
-        private eLicenseType k_LicenseType;
+        private eLicenseType m_LicenseType;
         private int m_EngineCapacity;
 
         public Motorcycle()
@@ -33,13 +33,13 @@ namespace Ex03.GarageLogic
 
         public eLicenseType LicenseType
         {
-            get { return k_LicenseType; }
-            set {  k_LicenseType = value; }
+            get { return m_LicenseType; }
+            set { m_LicenseType = value; }
         }
 
         public override string ToString()
         {
-            return string.Format("License Type: {0}{1}Engine Capacity: ", k_LicenseType.ToString(), Environment.NewLine, m_EngineCapacity.ToString());
+            return string.Format("License Type: {0}{1}Engine Capacity: ", m_LicenseType.ToString(), Environment.NewLine, m_EngineCapacity.ToString());
         }
     }
 }

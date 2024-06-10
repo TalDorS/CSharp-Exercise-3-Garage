@@ -64,5 +64,11 @@ namespace Ex03.GarageLogic
             get { return m_ModelName; }
             set { m_ModelName = value; }
         }
+
+        public string LicenseNumber
+        {
+            get { return m_LicenseNumber; }
+            set { m_LicenseNumber = value; }
+        }
     }
 }

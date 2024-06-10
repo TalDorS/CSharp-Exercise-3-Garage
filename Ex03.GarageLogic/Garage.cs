@@ -12,12 +12,10 @@ namespace Ex03.GarageLogic
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
         private Dictionary<string, CustomerInfo> m_CustomersInfo = new Dictionary<string, CustomerInfo>();
 
-        public void InsertCarToGarage(string i_LicenseNumber)
+        public void InsertCarToGarage(Vehicle i_Vehicle, CustomerInfo i_ClientInfo)
         {
-            if (!IsCarInGarage(i_LicenseNumber))
-            {
-                throw new ArgumentException("There is no vehicle with this license number in the garage.");
-            }
+            m_Vehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
+            m_CustomersInfo.Add(i_Vehicle.LicenseNumber, i_ClientInfo);
         }
 
         public bool IsCarInGarage(string i_LicenseNumber)
@@ -88,7 +86,7 @@ namespace Ex03.GarageLogic
             (m_Vehicles[i_LicenseNumber].Engine as ElectricEngine).AddCharge(i_MinutesToCharge);
         }
 
-        public string VehicleInfoToString(string i_LicenseNumber)
+        public string VehicleInfoToString(string i_LicenseNumber) // 7
         {
             Vehicle currentVehicle;
             CustomerInfo currentCustomer;

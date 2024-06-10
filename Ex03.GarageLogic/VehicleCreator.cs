@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
 {
     public class VehicleCreator
     {
-        public Vehicle CreateVehicle(eVehicleType i_VehicleType)
+        public static Vehicle CreateVehicle(eVehicleType i_VehicleType)
         {
             Vehicle newVehicle = null;
 
@@ -54,7 +54,7 @@ namespace Ex03.GarageLogic
             return newVehicle;
         }
 
-        private List<Wheel> createWheels(int i_NumOfWheels, string i_ManufacturerName, float i_CurrentAirPressure, float i_MaxAirPressure)
+        private static List<Wheel> CreateWheels(int i_NumOfWheels, string i_ManufacturerName, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
             List<Wheel> wheels = new List<Wheel>();
 

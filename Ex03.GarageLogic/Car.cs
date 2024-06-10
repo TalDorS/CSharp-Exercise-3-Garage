@@ -13,7 +13,7 @@ namespace Ex03.GarageLogic
         private const float k_MaxCarWheelPressure = 31f;
         private const float k_MaxCarFuel = 45f;
         private const float k_MaxCarCharge = 3.5f;
-        private eCarColor k_CarColor;
+        private eCarColor m_CarColor;
         private int numOfDoors;
 
         public Car() 
@@ -31,9 +31,15 @@ namespace Ex03.GarageLogic
             set { numOfDoors = value; }
         }
 
+        public eCarColor ColorOfCar
+        {
+            get { return m_CarColor; }
+            set { m_CarColor = value; }
+        }
+
         public override string ToString()
         {
-            return string.Format("Car Color: {0}{1}Number Of Doors: ", k_CarColor.ToString(), Environment.NewLine, numOfDoors.ToString());
+            return string.Format("Car Color: {0}{1}Number Of Doors: ", m_CarColor.ToString(), Environment.NewLine, numOfDoors.ToString());
         }
     }
 }

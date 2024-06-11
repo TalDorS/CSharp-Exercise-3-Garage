@@ -102,5 +102,20 @@ namespace Ex03.GarageLogic
             return string.Format("License Number: {0}{1}Model Name: {2}{1}{3}{1}{4}{1}{5}{1}{6}{1}"
                 , i_LicenseNumber, Environment.NewLine, currentVehicle.ModelName, currentCustomer.ToString(), currentVehicle.Wheels[0].ToString(), currentVehicle.Engine.ToString(), currentVehicle.ToString());
         }
+
+        public List<string> GetLicenseListByState(eVehicleStatus i_VehicleStatus)
+        {
+            List<string> licenseList = new List<string>();
+
+            foreach(string licenseNumber in m_CustomersInfo.Keys)
+            {
+                if (m_CustomersInfo[licenseNumber].CarStatus == i_VehicleStatus)
+                {
+                    licenseList.Add(licenseNumber);
+                }
+            }
+
+            return licenseList;
+        }
     }
 }

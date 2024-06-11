@@ -37,6 +37,11 @@ namespace Ex03.GarageLogic
             set { m_CarColor = value; }
         }
 
+        public void SetNumOfDoors(string i_Value)
+        {
+
+        }
+
         public override string ToString()
         {
             return string.Format("Car Color: {0}{1}Number Of Doors: ", m_CarColor.ToString(), Environment.NewLine, numOfDoors.ToString());

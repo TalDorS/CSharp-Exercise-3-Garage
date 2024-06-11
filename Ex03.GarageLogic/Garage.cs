@@ -9,6 +9,7 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
+        private const int k_GetAll = -1;
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
         private Dictionary<string, CustomerInfo> m_CustomersInfo = new Dictionary<string, CustomerInfo>();
 
@@ -103,13 +104,13 @@ namespace Ex03.GarageLogic
                 , i_LicenseNumber, Environment.NewLine, currentVehicle.ModelName, currentCustomer.ToString(), currentVehicle.Wheels[0].ToString(), currentVehicle.Engine.ToString(), currentVehicle.ToString());
         }
 
-        public List<string> GetLicenseListByVehicleState(eVehicleStatus i_VehicleStatus)
+        public List<string> GetLicenseListByVehicleState(int i_VehicleStatus)
         {
             List<string> licenseList = new List<string>();
 
             foreach(string licenseNumber in m_CustomersInfo.Keys)
             {
-                if (m_CustomersInfo[licenseNumber].CarStatus == i_VehicleStatus)
+                if (i_VehicleStatus == k_GetAll || m_CustomersInfo[licenseNumber].CarStatus == (eVehicleStatus)i_VehicleStatus)
                 {
                     licenseList.Add(licenseNumber);
                 }

@@ -103,7 +103,7 @@ namespace Ex03.GarageLogic
                 , i_LicenseNumber, Environment.NewLine, currentVehicle.ModelName, currentCustomer.ToString(), currentVehicle.Wheels[0].ToString(), currentVehicle.Engine.ToString(), currentVehicle.ToString());
         }
 
-        public List<string> GetLicenseListByState(eVehicleStatus i_VehicleStatus)
+        public List<string> GetLicenseListByVehicleState(eVehicleStatus i_VehicleStatus)
         {
             List<string> licenseList = new List<string>();
 

@@ -36,6 +36,41 @@ namespace Ex03.GarageLogic
             set { m_CargoCapacity = value;}
         }
 
+        public void SetDangerousMaterials(string i_DangerousMaterialsInput)
+        {
+            if (!int.TryParse(i_DangerousMaterialsInput, out int o_DangerousMaterials))
+            {
+                throw new FormatException("Invalid input! can only accept integers");
+            }
+
+            switch (o_DangerousMaterials)
+            {
+                case 0:
+                    IsCarryingDangerousMaterials = false;
+                    break;
+                case 1:
+                    IsCarryingDangerousMaterials = true;
+                    break;
+                default:
+                    throw new ValueOutOfRangeException(0, 1);
+            }
+        }
+
+        public void SetCargoCapacity(string i_CargoCapacityInput)
+        {
+            if (!float.TryParse(i_CargoCapacityInput, out float o_CargoCapacity))
+            {
+                throw new FormatException("Invalid input! can only accept integers");
+            }
+
+            if (o_CargoCapacity < 0)
+            {
+                throw new ArgumentException("Cargo capacity cannot be negative!");
+            }
+
+            CargoCapacity = o_CargoCapacity;
+        }
+
         public override string ToString()
         {
             return string.Format("Is The Truck Carrying Dangerous Material: {0}{1}Cargo Capacity: ", m_IsDangerousMaterials.ToString(), Environment.NewLine, m_CargoCapacity.ToString());

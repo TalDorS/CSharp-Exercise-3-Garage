@@ -24,7 +24,7 @@ namespace Ex03.ConsoleUI
         private const int k_MinInputValue = 1;
         private const int k_NumOfFuelOptions = 4;
         private const int k_NumOfVehicleTypes = 4;
-        private const int k_LowercaseThreshold = 'a';
+        private const char k_LowercaseThreshold = 'a';
 
         private eUserAction displayMenuAndGetUserInput()
         {
@@ -543,14 +543,7 @@ Please choose an option (1 to 3): ";
             string licenseNumber = getLicenseNumberInGarage();
             bool userWantToQuit;
 
-            if (licenseNumber == string.Empty)
-            {
-                userWantToQuit = true;
-            }
-            else
-            {
-                userWantToQuit = false;
-            }
+            userWantToQuit = licenseNumber == string.Empty;
 
             if (!userWantToQuit)
             {

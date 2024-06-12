@@ -25,6 +25,9 @@ namespace Ex03.ConsoleUI
         private const int k_NumOfFuelOptions = 4;
         private const int k_NumOfVehicleTypes = 4;
         private const char k_LowercaseThreshold = 'a';
+        private const string k_SpecialAttribute1 = "1";
+        private const string k_SpecialAttribute2 = "2";
+
 
         private eUserAction displayMenuAndGetUserInput()
         {
@@ -341,103 +344,26 @@ Please enter the license number of the required vehicle: ");
 
         private void getAndValidateCarInfoFromUser(Car io_Car)
         {
-            io_Car.SetCarColor(getCarColorFromUser());
-            io_Car.SetNumOfDoors(getAmoutOfDoorsFromUser());
+            io_Car.GetSpecialAttributePrompt(k_SpecialAttribute1);
+            io_Car.SetAttribute(k_SpecialAttribute1, Console.ReadLine());
+            io_Car.GetSpecialAttributePrompt(k_SpecialAttribute2);
+            io_Car.SetAttribute(k_SpecialAttribute2, Console.ReadLine());
         }
+
         private void getAndValidateTruckInfoFromUser(Truck io_Track)
         {
-            io_Track.SetDangerousMaterials(getIfTruckCarryingDangerousMaterialsFromUser());
-            io_Track.SetCargoCapacity(getTruckCargoCapacityFromUser());
+            io_Track.GetSpecialAttributePrompt(k_SpecialAttribute1);
+            io_Track.SetAttribute(k_SpecialAttribute1, Console.ReadLine());
+            io_Track.GetSpecialAttributePrompt(k_SpecialAttribute2);
+            io_Track.SetAttribute(k_SpecialAttribute2, Console.ReadLine());
         }
+
         private void getMotorcycleInfoFromUser(Motorcycle io_Motorcycle)
         {
-            io_Motorcycle.SetLicenseType(getLicenseTypeFromUser());
-            io_Motorcycle.SetEngineCapacity(getMotorcycleEngineCapacityFromUser());
-        }
-        private string getCarColorFromUser()
-        {
-            StringBuilder messageToPrint = new StringBuilder();
-            int currentLocation = 1;
-            int maxInputValue = Enum.GetValues(typeof(eCarColor)).Length;
-            string inputValueFromUser;
-
-            Console.WriteLine("Please choose a car color: ");
-
-            foreach (eCarColor currentType in Enum.GetValues(typeof(eCarColor)))
-            {
-                messageToPrint.Append(string.Format(
-@"  {0}) {1}{2}", currentLocation, addSpacesBetweenStrings(currentType.ToString()), Environment.NewLine));
-                currentLocation++;
-            }
-
-            Console.WriteLine(messageToPrint);
-            inputValueFromUser = Console.ReadLine();
-
-            return inputValueFromUser;
-        }
-
-        private string getAmoutOfDoorsFromUser()
-        {
-            string inputValueFromUser;
-
-            Console.WriteLine(@"Please enter amount of car doors desired: 
-(You can choose 2, 3, 4 or 5) ");
-            inputValueFromUser = Console.ReadLine();
-
-            return inputValueFromUser;
-
-        }
-
-        private string getTruckCargoCapacityFromUser()
-        {
-            string inputValueFromUser;
-
-            Console.WriteLine("Please enter desired cargo capacity: ");
-            inputValueFromUser = Console.ReadLine(); 
-
-            return inputValueFromUser;
-        }
-
-        private string getIfTruckCarryingDangerousMaterialsFromUser()
-        {
-            string inputValueFromUser;
-
-            Console.WriteLine(@"Please choose if the truck carries dangerous materials:
-Choose 1 for carrying
-Choose 0 for not carrying");
-            inputValueFromUser = Console.ReadLine();
-
-            return inputValueFromUser;
-        }
-        private string getLicenseTypeFromUser()
-        {
-            StringBuilder messageToPrint = new StringBuilder();
-            int currentLocation = 1;
-            string inputValueFromUser;
-
-            Console.WriteLine("Please enter a License Type: ");
-
-            foreach (eLicenseType currentType in Enum.GetValues(typeof(eLicenseType)))
-            {
-                messageToPrint.Append(string.Format(
-@"  {0}) {1}{2}", currentLocation, addSpacesBetweenStrings(currentType.ToString()), Environment.NewLine));
-                currentLocation++;
-            }
-
-            Console.WriteLine(messageToPrint);
-            inputValueFromUser = Console.ReadLine();
-
-            return inputValueFromUser;
-        }
-
-        private string getMotorcycleEngineCapacityFromUser()
-        {
-            string inputValueFromUser;
-
-            Console.WriteLine("Please enter desired motorcycle engine capacity: ");
-            inputValueFromUser = Console.ReadLine();
-
-            return inputValueFromUser;
+            io_Motorcycle.GetSpecialAttributePrompt(k_SpecialAttribute1);
+            io_Motorcycle.SetAttribute(k_SpecialAttribute1, Console.ReadLine());
+            io_Motorcycle.GetSpecialAttributePrompt(k_SpecialAttribute2);
+            io_Motorcycle.SetAttribute(k_SpecialAttribute2, Console.ReadLine());
         }
 
         private void currentLicenseNumbersInGarage()

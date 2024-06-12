@@ -79,5 +79,9 @@ namespace Ex03.GarageLogic
             get { return m_VehicleType; }
             set { m_VehicleType = value; }
         }
+
+        public abstract string GetSpecialAttributeString(string i_SpecialAttributeNumber);
+
+        public abstract void SetAttribute(string i_AttributeNum, string i_AttributeValue);
     }
 }

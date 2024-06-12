@@ -9,6 +9,8 @@ namespace Ex03.GarageLogic
 {
     public class Motorcycle : Vehicle
     {
+        private const string k_LicenseTypeString = "1";
+        private const string k_EngineCapacityString = "2";
         private const int k_MinLicenseNum = 1;
         private const int k_MaxLicenseNum = 4;
         private const int k_NumberOfWheelsInMotorcycle = 2;
@@ -27,19 +29,53 @@ namespace Ex03.GarageLogic
             MaxCharge = k_MaxMotorcycleCharge;
         }
 
-        public int EngineCapacity
+        public override string GetSpecialAttributeString(string i_SpecialAttributeNumber)
         {
-            get { return m_EngineCapacity; }
-            set { m_EngineCapacity = value; }
+            string attributeString = string.Empty;
+
+            switch (i_SpecialAttributeNumber)
+            {
+                case k_LicenseTypeString:
+                    {
+                        attributeString = "Please enter the motorcycle's license (A , A1, AA, B1): ";
+                        break;
+                    }
+                case k_EngineCapacityString:
+                    {
+                        attributeString = "Please enter the motorcycle's engine capacity: ";
+                        break;
+                    }
+                default:
+                    {
+                        throw new ValueOutOfRangeException(1, 2);
+                    }
+            }
+
+            return i_SpecialAttributeNumber;
         }
 
-        public eLicenseType LicenseType
+        public override void SetAttribute(string i_AttributeNum, string i_AttributeValue)
         {
-            get { return m_LicenseType; }
-            set { m_LicenseType = value; }
+            switch (i_AttributeNum)
+            {
+                case k_LicenseTypeString:
+                    {
+                        this.setLicenseType(i_AttributeValue);
+                        break;
+                    }
+                case k_EngineCapacityString:
+                    {
+                        this.setEngineCapacity(i_AttributeNum);
+                        break;
+                    }
+                default:
+                    {
+                        throw new ValueOutOfRangeException(1, 2);
+                    }
+            }
         }
 
-        public void SetLicenseType(string i_LicenseInput)
+        private void setLicenseType(string i_LicenseInput)
         {
             if (!int.TryParse(i_LicenseInput, out int o_LicenseInput))
             {
@@ -54,7 +90,7 @@ namespace Ex03.GarageLogic
             m_LicenseType = (eLicenseType)o_LicenseInput;
         }
 
-        public void SetEngineCapacity(string i_EngineCapacity)
+        private void setEngineCapacity(string i_EngineCapacity)
         {
             if (!int.TryParse(i_EngineCapacity, out int o_EngineCapacity))
             {
@@ -66,7 +102,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Engine capacity cannot be negative!");
             }
 
-            EngineCapacity = o_EngineCapacity;
+            m_EngineCapacity = o_EngineCapacity;
         }
 
         public override string ToString()

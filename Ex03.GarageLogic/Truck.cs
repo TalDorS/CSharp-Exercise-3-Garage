@@ -9,6 +9,8 @@ namespace Ex03.GarageLogic
 {
     public class Truck : Vehicle
     {
+        private const string k_DangerousMaterials = "1";
+        private const string k_CargoCapacity = "2";
         private const int k_NumberOfWheelsInTruck = 12;
         private const float k_MaxTruckWheelPressure = 28f;
         private const float k_MaxCarFuel = 120f;
@@ -24,19 +26,53 @@ namespace Ex03.GarageLogic
             MaxFuel = k_MaxCarFuel;
         }
 
-        public bool IsCarryingDangerousMaterials
+        public override string GetSpecialAttributeString(string i_SpecialAttributeNumber)
         {
-            get { return m_IsDangerousMaterials; }
-            set { m_IsDangerousMaterials = value;}
+            string attributeString = string.Empty;
+
+            switch (i_SpecialAttributeNumber)
+            {
+                case k_DangerousMaterials:
+                    {
+                        attributeString = "Please enter if the truck is carrying dangerous materials: ";
+                        break;
+                    }
+                case k_CargoCapacity:
+                    {
+                        attributeString = "Please enter the truck's cargo capacity: ";
+                        break;
+                    }
+                default:
+                    {
+                        throw new ValueOutOfRangeException(1, 2);
+                    }
+            }
+
+            return i_SpecialAttributeNumber;
         }
 
-        public float CargoCapacity
+        public override void SetAttribute(string i_AttributeNum, string i_AttributeValue)
         {
-            get { return m_CargoCapacity; }
-            set { m_CargoCapacity = value;}
+            switch (i_AttributeNum)
+            {
+                case k_DangerousMaterials:
+                    {
+                        this.setDangerousMaterials(i_AttributeValue);
+                        break;
+                    }
+                case k_CargoCapacity:
+                    {
+                        this.setCargoCapacity(i_AttributeNum);
+                        break;
+                    }
+                default:
+                    {
+                        throw new ValueOutOfRangeException(1, 2);
+                    }
+            }
         }
 
-        public void SetDangerousMaterials(string i_DangerousMaterialsInput)
+        private void setDangerousMaterials(string i_DangerousMaterialsInput)
         {
             if (!int.TryParse(i_DangerousMaterialsInput, out int o_DangerousMaterials))
             {
@@ -46,17 +82,17 @@ namespace Ex03.GarageLogic
             switch (o_DangerousMaterials)
             {
                 case 0:
-                    IsCarryingDangerousMaterials = false;
+                    m_IsDangerousMaterials = false;
                     break;
                 case 1:
-                    IsCarryingDangerousMaterials = true;
+                    m_IsDangerousMaterials = true;
                     break;
                 default:
                     throw new ValueOutOfRangeException(0, 1);
             }
         }
 
-        public void SetCargoCapacity(string i_CargoCapacityInput)
+        private void setCargoCapacity(string i_CargoCapacityInput)
         {
             if (!float.TryParse(i_CargoCapacityInput, out float o_CargoCapacity))
             {
@@ -68,7 +104,7 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Cargo capacity cannot be negative!");
             }
 
-            CargoCapacity = o_CargoCapacity;
+            m_CargoCapacity = o_CargoCapacity;
         }
 
         public override string ToString()

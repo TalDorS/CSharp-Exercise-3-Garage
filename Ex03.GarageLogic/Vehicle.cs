@@ -87,12 +87,14 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-@"
-Vehicle Info:
+@"---Vehicle Info---
 License number: {0}
 Model name: {1}
+
 {2}
+
 {3}
+
 {4}",
 LicenseNumber,
 ModelName,

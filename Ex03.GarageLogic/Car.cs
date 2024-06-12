@@ -39,7 +39,7 @@ namespace Ex03.GarageLogic
             {
                 case k_CarColor:
                 {
-                    attributeString = "Please choose a car color (Yellow, White, Red, Black): ";
+                    attributeString = "Please choose a car color (Yellow=1, White=2, Red=3, Black=4): ";
                     break;
                 }
                 case k_NumberOfDoors:
@@ -53,7 +53,7 @@ namespace Ex03.GarageLogic
                 }
             }
 
-            return i_SpecialAttributeNumber;
+            return attributeString;
         }
 
         public override void SetAttribute(string i_AttributeNum, string i_AttributeValue)
@@ -62,12 +62,12 @@ namespace Ex03.GarageLogic
             {
                 case k_CarColor:
                     {
-                        this.SetNumOfDoors(i_AttributeValue);
+                        this.SetCarColor(i_AttributeValue);
                         break;
                     }
                 case k_NumberOfDoors:
                     {
-                        this.SetCarColor(i_AttributeValue);
+                        this.SetNumOfDoors(i_AttributeValue);
                         break;
                     }
                 default:
@@ -110,7 +110,7 @@ namespace Ex03.GarageLogic
         public override string GetSpecialAttributesString()
         {
             return string.Format(
-@"
+@"---Special Attributes Info---
 Car Color: {0}
 Number of Doors: {1}",
 m_CarColor.ToString(),

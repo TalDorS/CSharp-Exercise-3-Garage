@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
     {
         private string m_Name;
         private string m_PhoneNumber;
-        private eVehicleStatus k_CarStatus = eVehicleStatus.InRepair;
+        private eVehicleStatus k_VehicleStatus = eVehicleStatus.InRepair;
 
         public CustomerInfo(string i_Name, string i_PhoneNumber) 
         {
@@ -19,10 +19,10 @@ namespace Ex03.GarageLogic
             m_PhoneNumber = i_PhoneNumber;
         }
 
-        public eVehicleStatus CarStatus
+        public eVehicleStatus VehicleStatus
         {
-            get { return k_CarStatus; }
-            set { k_CarStatus = value; }
+            get { return k_VehicleStatus; }
+            set { k_VehicleStatus = value; }
         }
 
         public string Name
@@ -34,12 +34,11 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-@"
-Customer Info:
+@"---Customer Info---
 Owner Name: {0}
 Current State: {1}",
 Name,
-k_CarStatus.ToString());
+k_VehicleStatus.ToString());
         }
     }
 }

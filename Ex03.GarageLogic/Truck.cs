@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
                     }
             }
 
-            return i_SpecialAttributeNumber;
+            return attributeString;
         }
 
         public override void SetAttribute(string i_AttributeNum, string i_AttributeValue)
@@ -110,7 +110,7 @@ namespace Ex03.GarageLogic
         public override string GetSpecialAttributesString()
         {
             return string.Format(
-@"
+@"---Special Attributes Info---
 Is The Truck Carrying Dangerous Materials: {0}
 Truck's Cargo Capacity: {1}",
 m_IsDangerousMaterials.ToString(),

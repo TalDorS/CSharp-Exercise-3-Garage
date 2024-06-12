@@ -62,7 +62,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-@"
+@"---Wheels Info---
 Current Wheel Air Pressure: {0}
 Max Wheel Air Pressure: {1}
 Wheel's Manufacturer Name: {2}",

@@ -21,10 +21,9 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format(
-@"
+@"---Electric Engine Info---
 Current Engine Charge: {0}
-Max Charge: {1}
-Fuel Type: {2}",
+Max Charge: {1}",
 CurrentEnergy,
 MaxAmountOfEnergy);
         }

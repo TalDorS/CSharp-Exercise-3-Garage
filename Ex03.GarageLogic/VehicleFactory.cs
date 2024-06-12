@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ex03.GarageLogic
 {
-    public class VehicleCreator
+    public class VehicleFactory
     {
         public static Vehicle CreateVehicle(eVehicleType i_VehicleType)
         {

@@ -1,4 +1,5 @@
 ﻿using Ex03.GarageLogic;
+using Ex03.GarageLogic.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

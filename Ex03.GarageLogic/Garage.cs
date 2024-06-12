@@ -13,20 +13,20 @@ namespace Ex03.GarageLogic
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
         private Dictionary<string, CustomerInfo> m_CustomersInfo = new Dictionary<string, CustomerInfo>();
 
-        public void InsertCarToGarage(Vehicle i_Vehicle, CustomerInfo i_ClientInfo)
+        public void InsertVehicleToGarage(Vehicle i_Vehicle, CustomerInfo i_ClientInfo)
         {
             m_Vehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);
             m_CustomersInfo.Add(i_Vehicle.LicenseNumber, i_ClientInfo);
         }
 
-        public bool IsCarInGarage(string i_LicenseNumber)
+        public bool IsVehicleInGarage(string i_LicenseNumber)
         {
             return m_Vehicles.ContainsKey(i_LicenseNumber);
         }
 
-        public Vehicle GetCarByLicenseNumber(string i_LicenseNumber)
+        public Vehicle GetVehicleByLicenseNumber(string i_LicenseNumber)
         {
-            if (!IsCarInGarage(i_LicenseNumber))
+            if (!IsVehicleInGarage(i_LicenseNumber))
             {
                 throw new ArgumentException("There is no vehicle with this license number in the garage.");
             }
@@ -36,17 +36,17 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleState(string i_LicenseNumber, eVehicleStatus i_Status) // 3
         {
-            if (!IsCarInGarage(i_LicenseNumber))
+            if (!IsVehicleInGarage(i_LicenseNumber))
             {
                 throw new ArgumentException("There is no vehicle with this license number in the garage.");
             }
 
-            m_CustomersInfo[i_LicenseNumber].CarStatus = i_Status;
+            m_CustomersInfo[i_LicenseNumber].VehicleStatus = i_Status;
         }
 
         public void InflateWheelsToMax(string i_LicenseNumber) // 4
         {
-            if (!IsCarInGarage(i_LicenseNumber))
+            if (!IsVehicleInGarage(i_LicenseNumber))
             {
                 throw new ArgumentException("There is no vehicle with this license number in the garage.");
             }
@@ -59,7 +59,7 @@ namespace Ex03.GarageLogic
 
         public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountOfFuel) // 5
         {
-            if (!IsCarInGarage(i_LicenseNumber))
+            if (!IsVehicleInGarage(i_LicenseNumber))
             {
                 throw new ArgumentException("There is no vehicle with this license number in the garage.");
             }
@@ -74,7 +74,7 @@ namespace Ex03.GarageLogic
 
         public void ChargeVehicle(string i_LicenseNumber, float i_MinutesToCharge) // 6
         {
-            if (!IsCarInGarage(i_LicenseNumber))
+            if (!IsVehicleInGarage(i_LicenseNumber))
             {
                 throw new ArgumentException("There is no vehicle with this license number in the garage.");
             }
@@ -92,7 +92,7 @@ namespace Ex03.GarageLogic
             Vehicle currentVehicle;
             CustomerInfo currentCustomer;
 
-            if (!IsCarInGarage(i_LicenseNumber))
+            if (!IsVehicleInGarage(i_LicenseNumber))
             {
                 throw new ArgumentException("There is no vehicle with this license number in the garage.");
             }
@@ -103,6 +103,7 @@ namespace Ex03.GarageLogic
             return string.Format(
 @"
 {0}
+
 {1}",
 currentCustomer.ToString(), 
 currentVehicle.ToString());
@@ -114,7 +115,7 @@ currentVehicle.ToString());
 
             foreach(string licenseNumber in m_CustomersInfo.Keys)
             {
-                if (i_VehicleStatus == k_GetAll || m_CustomersInfo[licenseNumber].CarStatus == (eVehicleStatus)i_VehicleStatus)
+                if (i_VehicleStatus == k_GetAll || m_CustomersInfo[licenseNumber].VehicleStatus == (eVehicleStatus)i_VehicleStatus)
                 {
                     licenseList.Add(licenseNumber);
                 }

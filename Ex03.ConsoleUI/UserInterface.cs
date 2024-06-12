@@ -25,8 +25,8 @@ namespace Ex03.ConsoleUI
         private const int k_NumOfFuelOptions = 4;
         private const int k_NumOfVehicleTypes = 4;
         private const char k_LowercaseThreshold = 'a';
-        private const string k_SpecialAttribute1 = "1";
-        private const string k_SpecialAttribute2 = "2";
+        private const string k_FirstSpecialAttribute = "1";
+        private const string k_SecondSpecialAttribute = "2";
 
 
         private eUserAction displayMenuAndGetUserInput()
@@ -214,13 +214,16 @@ The input should only contain digits, please try again: ");
 
             return inputNumberFromUser;
         } 
+
         private void insertVehicle()
         {
+            string licenseNumber;
+
             Console.WriteLine(@"Hello
 Please enter the license number of the required vehicle: ");
-            string licenseNumber = getNonEmptyUserInput();
+            licenseNumber = getNonEmptyUserInput();
             //check if number exists then change the state and print a message 
-            if (m_Garage.IsCarInGarage(licenseNumber))// should be a method here to check is license plate already in system
+            if (m_Garage.IsVehicleInGarage(licenseNumber))// should be a method here to check is license plate already in system
             {
                 int changeStatus = 1;
                 int cancelOption = 2;
@@ -235,9 +238,10 @@ Please enter the license number of the required vehicle: ");
             {
                 Vehicle newVehicle = createNewVehicle(licenseNumber);
                 CustomerInfo newCustomer = createNewCustomer();
-                m_Garage.InsertCarToGarage(newVehicle, newCustomer);
+                m_Garage.InsertVehicleToGarage(newVehicle, newCustomer);
             }
         }
+
         private Vehicle createNewVehicle(string i_LicenseNumber)
         {
             int inputTypeOfVehicleNumber;
@@ -250,7 +254,7 @@ Please enter the license number of the required vehicle: ");
 
             // Get vehicle
             inputTypeOfVehicleNumber = getTypeOfVehicleNumber();
-            newVehicle = VehicleCreator.CreateVehicle((eVehicleType)inputTypeOfVehicleNumber);
+            newVehicle = VehicleFactory.CreateVehicle((eVehicleType)inputTypeOfVehicleNumber);
             newVehicle.LicenseNumber = i_LicenseNumber;
             // Vehicle model
             modelName = getNonEmptyUserInput("Please enter the vehicle's model name: ");
@@ -258,7 +262,7 @@ Please enter the license number of the required vehicle: ");
             // Wheels
             wheelsManufacturer = getNonEmptyUserInput("Please enter the wheels manufacturer's name: ");
             wheelsCurrentAirPressure = getAndValidateFloatInRange(0, newVehicle.MaxWheelPressure, "Please enter the current air pressure of the wheels: ");
-            wheelsList = VehicleCreator.CreateWheels(newVehicle.NumOfWheels, wheelsManufacturer, wheelsCurrentAirPressure, newVehicle.MaxWheelPressure);
+            wheelsList = VehicleFactory.CreateWheels(newVehicle.NumOfWheels, wheelsManufacturer, wheelsCurrentAirPressure, newVehicle.MaxWheelPressure);
             newVehicle.Wheels = wheelsList;
             // Energy and fuel
             currentEnergyLeft = getAndValidateFloatInRange(0, newVehicle.Engine.MaxAmountOfEnergy, "Please enter the amount of fuel/charging hours left for the vehicle: ");
@@ -268,6 +272,7 @@ Please enter the license number of the required vehicle: ");
 
             return newVehicle;
         }
+
         private CustomerInfo createNewCustomer()
         {
             string clientName = getNonEmptyUserInput("Please enter your name: ");
@@ -276,6 +281,7 @@ Please enter the license number of the required vehicle: ");
           
             return clientInfo;
         }
+
         private int getTypeOfVehicleNumber()//function to print all vehicle options and get the option from the user
         {
             StringBuilder messageToPrint = new StringBuilder();
@@ -295,31 +301,17 @@ Please enter the license number of the required vehicle: ");
 
             return getAndValidateIntInRange(k_MinInputValue, maxInputValue);
         }
+
         private void updateExtraVehicleFeatures(Vehicle io_Vehicle)
         {
-            eVehicleType vehicleType = io_Vehicle.VehicleType;
             bool success = false;
 
             while (!success)
             {
                 try
                 {
-                    switch (vehicleType)
-                    {
-                        case eVehicleType.ElectricCar:
-                        case eVehicleType.FuelCar:
-                            getAndValidateCarInfoFromUser(io_Vehicle as Car);
-                            break;
-
-                        case eVehicleType.Truck:
-                            getAndValidateTruckInfoFromUser(io_Vehicle as Truck);
-                            break;
-
-                        case eVehicleType.FuelMotorcycle:
-                        case eVehicleType.ElectricMotorcycle:
-                            getMotorcycleInfoFromUser(io_Vehicle as Motorcycle);
-                            break;
-                    }
+                    getSpecialAttributeFromUser(io_Vehicle, k_FirstSpecialAttribute);
+                    getSpecialAttributeFromUser(io_Vehicle, k_SecondSpecialAttribute);
                     success = true; 
                 }
                 catch (ArgumentException argumentException)
@@ -342,28 +334,15 @@ Please enter the license number of the required vehicle: ");
             promptUserToPressEnterToContinue();
         }
 
-        private void getAndValidateCarInfoFromUser(Car io_Car)
+        private void getSpecialAttributeFromUser(Vehicle io_Vehicle, string i_AttributeNumber)
         {
-            io_Car.GetSpecialAttributePrompt(k_SpecialAttribute1);
-            io_Car.SetAttribute(k_SpecialAttribute1, Console.ReadLine());
-            io_Car.GetSpecialAttributePrompt(k_SpecialAttribute2);
-            io_Car.SetAttribute(k_SpecialAttribute2, Console.ReadLine());
-        }
+            string messageForUser = string.Empty;
+            string usersAnswer = string.Empty;
 
-        private void getAndValidateTruckInfoFromUser(Truck io_Track)
-        {
-            io_Track.GetSpecialAttributePrompt(k_SpecialAttribute1);
-            io_Track.SetAttribute(k_SpecialAttribute1, Console.ReadLine());
-            io_Track.GetSpecialAttributePrompt(k_SpecialAttribute2);
-            io_Track.SetAttribute(k_SpecialAttribute2, Console.ReadLine());
-        }
-
-        private void getMotorcycleInfoFromUser(Motorcycle io_Motorcycle)
-        {
-            io_Motorcycle.GetSpecialAttributePrompt(k_SpecialAttribute1);
-            io_Motorcycle.SetAttribute(k_SpecialAttribute1, Console.ReadLine());
-            io_Motorcycle.GetSpecialAttributePrompt(k_SpecialAttribute2);
-            io_Motorcycle.SetAttribute(k_SpecialAttribute2, Console.ReadLine());
+            messageForUser = io_Vehicle.GetSpecialAttributePrompt(i_AttributeNumber);
+            Console.WriteLine(messageForUser);
+            usersAnswer = Console.ReadLine();
+            io_Vehicle.SetAttribute(i_AttributeNumber, usersAnswer);
         }
 
         private void currentLicenseNumbersInGarage()
@@ -430,7 +409,7 @@ Please choose an option (1 to 4):";
             Console.WriteLine("Please enter the vehicle's license number: ");
             licenserNumber = getNonEmptyUserInput();
             isUserNotDone = true;
-            isLicenseNumberInGarage = m_Garage.IsCarInGarage(licenserNumber);
+            isLicenseNumberInGarage = m_Garage.IsVehicleInGarage(licenserNumber);
             while (isUserNotDone && (!isLicenseNumberInGarage))
             {
                 Console.WriteLine("This vehicle is not in the garage currently");
@@ -443,7 +422,7 @@ Please choose an option (1 to 4):";
 
                 Console.WriteLine("Try again: ");
                 licenserNumber = getNonEmptyUserInput();
-                isLicenseNumberInGarage = m_Garage.IsCarInGarage(licenserNumber);
+                isLicenseNumberInGarage = m_Garage.IsVehicleInGarage(licenserNumber);
             }
 
             return licenserNumber;
@@ -566,42 +545,36 @@ Please choose an option: ";
                             insertVehicle();
                             break;
                         }
-
                     case eUserAction.DisplayAllLicenseNumbers:
                         {
                             Console.Clear();
                             currentLicenseNumbersInGarage();
                             break;
                         }
-
                     case eUserAction.ChangeVehicleState:
                         {
                             Console.Clear();
                             changeVehicleStatus();
                             break;
                         }
-
                     case eUserAction.InflateTyersToMax:
                         {
                             Console.Clear();
                             inflateWheelsToMax();
                             break;
                         }
-
                     case eUserAction.FuelVehicle:
                         {
                             Console.Clear();
                             fuelVehicle();
                             break;
                         }
-
                     case eUserAction.ChargeVehicle:
                         {
                             Console.Clear();
                             chargeVehicle();
                             break;
                         }
-
                     case eUserAction.DisplayVehicle:
                         {
                             Console.Clear();

@@ -51,7 +51,7 @@ namespace Ex03.GarageLogic
                     }
             }
 
-            return i_SpecialAttributeNumber;
+            return attributeString;
         }
 
         public override void SetAttribute(string i_AttributeNum, string i_AttributeValue)
@@ -108,7 +108,7 @@ namespace Ex03.GarageLogic
         public override string GetSpecialAttributesString()
         {
             return string.Format(
-@"
+@"---Special Attributes Info---
 Motorcycle's License Type: {0}
 Motorcycle's Engine Capacity: {1}",
 m_LicenseType.ToString(),

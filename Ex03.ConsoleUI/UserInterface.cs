@@ -225,13 +225,12 @@ Please enter the license number of the required vehicle: ");
             //check if number exists then change the state and print a message 
             if (m_Garage.IsVehicleInGarage(licenseNumber))// should be a method here to check is license plate already in system
             {
-                int changeStatus = 1;
-                int cancelOption = 2;
-                int inputNumber = getAndValidateIntInRange(changeStatus, cancelOption, string.Format(
-@"Vehicle with license number '{0}' is now changed to state: In Repairing",licenseNumber));
+                string MessageToUser = string.Format(
+@"Vehicle with license number '{0}' is now changed to state: In Repairing",licenseNumber);
                 //update state of vehicle
-
-                m_Garage.ChangeVehicleState(licenseNumber, eVehicleStatus.InRepair); 
+                Console.WriteLine(MessageToUser);
+                m_Garage.ChangeVehicleState(licenseNumber, eVehicleStatus.InRepair);
+                promptUserToPressEnterToContinue();
             }
             //if number doesnt exist continue to the create vehicle
             else
@@ -336,13 +335,26 @@ Please enter the license number of the required vehicle: ");
 
         private void getSpecialAttributeFromUser(Vehicle io_Vehicle, string i_AttributeNumber)
         {
+            bool  isValidInput = false;
             string messageForUser = string.Empty;
             string usersAnswer = string.Empty;
 
-            messageForUser = io_Vehicle.GetSpecialAttributePrompt(i_AttributeNumber);
-            Console.WriteLine(messageForUser);
-            usersAnswer = Console.ReadLine();
-            io_Vehicle.SetAttribute(i_AttributeNumber, usersAnswer);
+            while (!isValidInput)
+            {
+                try
+                {
+                    messageForUser = io_Vehicle.GetSpecialAttributePrompt(i_AttributeNumber);
+                    Console.WriteLine(messageForUser);
+                    usersAnswer = Console.ReadLine();
+                    io_Vehicle.SetAttribute(i_AttributeNumber, usersAnswer);
+                    isValidInput = true;
+                }
+                catch (ValueOutOfRangeException valueOutOfRange)
+                {
+                    Console.WriteLine(valueOutOfRange.Message);
+                    promptUserToPressEnterToContinue();
+                }
+            }
         }
 
         private void currentLicenseNumbersInGarage()

@@ -80,8 +80,27 @@ namespace Ex03.GarageLogic
             set { m_VehicleType = value; }
         }
 
-        public abstract string GetSpecialAttributeString(string i_SpecialAttributeNumber);
+        public abstract string GetSpecialAttributePrompt(string i_SpecialAttributeNumber);
 
         public abstract void SetAttribute(string i_AttributeNum, string i_AttributeValue);
+
+        public override string ToString()
+        {
+            return string.Format(
+@"
+Vehicle Info:
+License number: {0}
+Model name: {1}
+{2}
+{3}
+{4}",
+LicenseNumber,
+ModelName,
+Wheels[0].ToString(),
+Engine.ToString(),
+GetSpecialAttributesString());
+        }
+
+        public abstract string GetSpecialAttributesString();
     }
 }

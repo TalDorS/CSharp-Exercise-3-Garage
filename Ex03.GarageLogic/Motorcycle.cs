@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
             MaxCharge = k_MaxMotorcycleCharge;
         }
 
-        public override string GetSpecialAttributeString(string i_SpecialAttributeNumber)
+        public override string GetSpecialAttributePrompt(string i_SpecialAttributeNumber)
         {
             string attributeString = string.Empty;
 
@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
             {
                 case k_LicenseTypeString:
                     {
-                        attributeString = "Please enter the motorcycle's license (A , A1, AA, B1): ";
+                        attributeString = "Please enter the motorcycle's license (A=1 , A1=2, AA=3, B1=4): ";
                         break;
                     }
                 case k_EngineCapacityString:
@@ -105,9 +105,14 @@ namespace Ex03.GarageLogic
             m_EngineCapacity = o_EngineCapacity;
         }
 
-        public override string ToString()
+        public override string GetSpecialAttributesString()
         {
-            return string.Format("License Type: {0}{1}Engine Capacity: ", m_LicenseType.ToString(), Environment.NewLine, m_EngineCapacity.ToString());
+            return string.Format(
+@"
+Motorcycle's License Type: {0}
+Motorcycle's Engine Capacity: {1}",
+m_LicenseType.ToString(),
+m_EngineCapacity.ToString());
         }
     }
 }

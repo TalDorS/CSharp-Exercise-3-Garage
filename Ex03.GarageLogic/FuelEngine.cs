@@ -28,7 +28,14 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Current Litters Of Fule: {0}{1}Fuel Type: {2}", m_CurrentEnergy, Environment.NewLine, m_FuelType.ToString());
+            return string.Format(
+@"
+Current Amount Of Fuel: {0}
+Max Amount Of Fuel: {1}
+Fuel Type: {2}",
+CurrentEnergy,
+MaxAmountOfEnergy,
+m_FuelType.ToString());
         }
     }
 }

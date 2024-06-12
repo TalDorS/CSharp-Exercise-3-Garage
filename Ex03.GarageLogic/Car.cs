@@ -31,7 +31,7 @@ namespace Ex03.GarageLogic
             MaxCharge = k_MaxCarCharge;
         }
 
-        public override string GetSpecialAttributeString(string i_SpecialAttributeNumber)
+        public override string GetSpecialAttributePrompt(string i_SpecialAttributeNumber)
         {
             string attributeString = string.Empty;
 
@@ -92,11 +92,6 @@ namespace Ex03.GarageLogic
             m_NumOfDoors = o_NumOfDoors;
         }
 
-        public override string ToString()
-        {
-            return string.Format("Car Color: {0}{1}Number Of Doors: ", m_CarColor.ToString(), Environment.NewLine, m_NumOfDoors.ToString());
-        }
-
         public void SetCarColor(string i_CarColorInput)
         {
             if (!int.TryParse(i_CarColorInput, out int o_CarColor))
@@ -110,6 +105,16 @@ namespace Ex03.GarageLogic
             }
 
             m_CarColor = (eCarColor)o_CarColor;
+        }
+
+        public override string GetSpecialAttributesString()
+        {
+            return string.Format(
+@"
+Car Color: {0}
+Number of Doors: {1}",
+m_CarColor.ToString(),
+m_NumOfDoors.ToString());
         }
     }
 }

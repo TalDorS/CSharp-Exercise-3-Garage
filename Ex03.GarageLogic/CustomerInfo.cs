@@ -33,7 +33,13 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Owner Name: {0}{1}Current State: {2}", Name, Environment.NewLine, k_CarStatus);
+            return string.Format(
+@"
+Customer Info:
+Owner Name: {0}
+Current State: {1}",
+Name,
+k_CarStatus.ToString());
         }
     }
 }

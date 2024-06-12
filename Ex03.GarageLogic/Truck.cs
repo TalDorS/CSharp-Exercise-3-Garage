@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
             MaxFuel = k_MaxCarFuel;
         }
 
-        public override string GetSpecialAttributeString(string i_SpecialAttributeNumber)
+        public override string GetSpecialAttributePrompt(string i_SpecialAttributeNumber)
         {
             string attributeString = string.Empty;
 
@@ -107,9 +107,14 @@ namespace Ex03.GarageLogic
             m_CargoCapacity = o_CargoCapacity;
         }
 
-        public override string ToString()
+        public override string GetSpecialAttributesString()
         {
-            return string.Format("Is The Truck Carrying Dangerous Material: {0}{1}Cargo Capacity: ", m_IsDangerousMaterials.ToString(), Environment.NewLine, m_CargoCapacity.ToString());
+            return string.Format(
+@"
+Is The Truck Carrying Dangerous Materials: {0}
+Truck's Cargo Capacity: {1}",
+m_IsDangerousMaterials.ToString(),
+m_CargoCapacity.ToString());
         }
     }
 }

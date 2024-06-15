@@ -28,7 +28,6 @@ namespace Ex03.ConsoleUI
         private const string k_FirstSpecialAttribute = "1";
         private const string k_SecondSpecialAttribute = "2";
 
-
         private eUserAction displayMenuAndGetUserInput()
         {
             string menuToPrint = string.Format(
@@ -48,12 +47,14 @@ Please choose an option: ({0} to {1})", k_MinMenuOption, k_MaxMenuOption);
 
             return (eUserAction)userChoice;
         }
+
         private int getAndValidateIntInRange(int i_MinValue, int i_MaxValue, string i_MessageForUser)
         {
             Console.WriteLine(i_MessageForUser);
 
             return getAndValidateIntInRange(i_MinValue, i_MaxValue);
         }
+
         private int getAndValidateIntInRange(int i_MinValue, int i_MaxValue)
         {
             int inputNumber = -1;
@@ -81,6 +82,7 @@ Please enter a number from {0} to {1}", i_MinValue, i_MaxValue);
 
             return inputNumber;
         }
+
         private float getAndValidateFloatInRange(float i_MinNumber, float i_MaxNumber, string i_Message)
         {
             float inputNumber = -1;
@@ -109,12 +111,14 @@ Please enter a number from {0} to {1}: ", i_MinNumber, i_MaxNumber));
 
             return inputNumber;
         }
+
         private string getNonEmptyUserInput(string i_MessageForUser)
         {
             Console.WriteLine(i_MessageForUser);
 
             return getNonEmptyUserInput();
         }
+
         private string getNonEmptyUserInput()
         {
             string userInput = Console.ReadLine();
@@ -129,6 +133,7 @@ Please insert a new input");
 
             return userInput;
         }
+
         private string addSpacesBetweenStrings(string i_StringToSpace)
         {
             string spacedString = i_StringToSpace[0].ToString();
@@ -147,12 +152,14 @@ Please insert a new input");
 
             return spacedString;
         }
+
         private string getOnlyDigitsString(string i_Message)
         {
             Console.WriteLine(i_Message);
 
             return getOnlyDigitsString();
         }
+
         private string getOnlyDigitsString()
         {
             string userInput = getNonEmptyUserInput();
@@ -166,16 +173,19 @@ The input should only contain digits, please try again: ");
 
             return userInput;
         }
+
         private bool isOnlyDigitInString(string i_UserInput)
         {
             return i_UserInput.All(Char.IsDigit);
         }
+
         private void promptUserToPressEnterToContinue()
         {
             Console.WriteLine("Press 'Enter' to continue");
             Console.ReadLine();
             Console.Clear();
         }
+
         private string licenseNumberToString(List<string> io_LicenseNumbers)
         {
             StringBuilder licenseNumbersToPrint = new StringBuilder();
@@ -196,6 +206,7 @@ The input should only contain digits, please try again: ");
 
             return licenseNumbersToPrint.ToString();
         }
+
         private float getValidFloatNumber()
         {
             float inputNumberFromUser;
@@ -223,17 +234,15 @@ The input should only contain digits, please try again: ");
             Console.WriteLine(@"Hello
 Please enter the license number of the required vehicle: ");
             licenseNumber = getNonEmptyUserInput();
-            //check if number exists then change the state and print a message 
+
             if (m_Garage.IsVehicleInGarage(licenseNumber))
             {
                 string MessageToUser = string.Format(
 @"Vehicle with license number '{0}' is now changed to state: In Repairing", licenseNumber);
                 Console.WriteLine(MessageToUser);
-                //update state of vehicle
                 m_Garage.ChangeVehicleState(licenseNumber, eVehicleStatus.InRepair);
                 promptUserToPressEnterToContinue();
             }
-            //if number doesnt exist continue to the create vehicle
             else
             {
                 Vehicle newVehicle = createNewVehicle(licenseNumber);
@@ -362,6 +371,8 @@ Please enter the license number of the required vehicle: ");
 
         private void currentLicenseNumbersInGarage()
         {
+            List<string> licenseNumbers;
+            int filterNumber;
             int maxInputValue = 4;
             int minInputValue = 1;
             string messageToPrint =
@@ -372,8 +383,7 @@ Please enter the license number of the required vehicle: ");
 4) No filter
 
 Please choose an option (1 to 4):";
-            int filterNumber = getAndValidateIntInRange(minInputValue, maxInputValue, messageToPrint);
-            List<string> licenseNumbers;
+            filterNumber = getAndValidateIntInRange(minInputValue, maxInputValue, messageToPrint);
 
             if (filterNumber >= maxInputValue)
             {
@@ -393,14 +403,14 @@ Please choose an option (1 to 4):";
         private bool isUserWantToCancel()
         {
             bool isUserNotDone;
+            int userInputNumber;
             int maxInputValue = 2;
             int minInputValue = 1;
             string messageToPrint =
 @"Would you like to try again or go back to the main menu:
 1) Try again
 2) Go back";
-
-            int userInputNumber = getAndValidateIntInRange(minInputValue, maxInputValue, messageToPrint);
+            userInputNumber = getAndValidateIntInRange(minInputValue, maxInputValue, messageToPrint);
 
             if (userInputNumber == minInputValue)
             {
@@ -595,7 +605,6 @@ Please choose an option: ";
 
             promptUserToPressEnterToContinue();
         }
-
 
         public void ManageGarage()
         {

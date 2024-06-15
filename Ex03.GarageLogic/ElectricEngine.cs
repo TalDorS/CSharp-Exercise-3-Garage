@@ -9,8 +9,6 @@ namespace Ex03.GarageLogic
 {
     public class ElectricEngine : Engine
     {
-        private eFuelType m_FuelType;
-
         public ElectricEngine(float i_MaxCharge) : base(i_MaxCharge) { }
 
         public void AddCharge(float i_HoursToAdd)

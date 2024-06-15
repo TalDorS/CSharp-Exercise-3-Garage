@@ -12,13 +12,20 @@ namespace Ex03.GarageLogic
         private string m_ModelName;
         private string m_LicenseNumber;
         private int m_NumOfWheels;
+        protected readonly float r_MaxFuel;
+        protected readonly float r_MaxCharge;
+        protected readonly float r_MaxWheelPressure;
         private Engine m_Engine;
         private List<Wheel> m_Wheels;
-        private float m_MaxFuel;
-        private float m_MaxCharge;
         private eVehicleType m_VehicleType;
         private eFuelType m_FuelType;
-        private float m_MaxWheelPressure;
+
+        protected Vehicle(float i_MaxFuel, float i_MaxCharge, float i_MaxWheelPressure)
+        {
+            r_MaxFuel = i_MaxFuel;
+            r_MaxCharge = i_MaxCharge;
+            r_MaxWheelPressure = i_MaxWheelPressure;
+        }
 
         public Engine Engine
         {
@@ -34,8 +41,7 @@ namespace Ex03.GarageLogic
 
         public float MaxWheelPressure
         {
-            get { return m_MaxWheelPressure; }
-            set { m_MaxWheelPressure = value; }
+            get { return r_MaxWheelPressure; }
         }
 
         public eFuelType FuelType
@@ -46,14 +52,12 @@ namespace Ex03.GarageLogic
 
         public float MaxFuel
         {
-            get { return m_MaxFuel; }
-            set { m_MaxFuel = value; }
+            get { return r_MaxFuel; }
         }
 
         public float MaxCharge
         {
-            get { return m_MaxCharge; }
-            set { m_MaxCharge = value; }
+            get { return r_MaxCharge; }
         }
 
         public List<Wheel> Wheels

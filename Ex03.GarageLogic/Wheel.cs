@@ -9,23 +9,20 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        private string m_ManufacturerName;
+        private readonly string r_ManufacturerName;
         private float m_CurrentAirPressure;
         private readonly float r_MaxAirPressure;
 
-        // CTOR
         public Wheel(string i_ManufacturerName, float i_CurrentAirPressure, float i_MaxAirPressure)
         {
-            m_ManufacturerName = i_ManufacturerName;
+            r_ManufacturerName = i_ManufacturerName;
             m_CurrentAirPressure = i_CurrentAirPressure;
             r_MaxAirPressure = i_MaxAirPressure;
         }
 
-        // Properties
         public string Manufacturer
         {
-            get { return m_ManufacturerName; }
-            set { m_ManufacturerName = value; }
+            get { return r_ManufacturerName; }
         }
 
         public float CurrentAirPressure
@@ -39,8 +36,7 @@ namespace Ex03.GarageLogic
             get { return r_MaxAirPressure; }
         }
 
-        // Methods
-        public void AddAir(float i_AirToAdd)
+        private void addAir(float i_AirToAdd)
         {
             float newAirPressure = m_CurrentAirPressure + i_AirToAdd;
 
@@ -56,7 +52,7 @@ namespace Ex03.GarageLogic
         {
             float newAirPressure = MaxAirPressure - m_CurrentAirPressure;
 
-            AddAir(newAirPressure);
+            addAir(newAirPressure);
         }
 
         public override string ToString()

@@ -38,7 +38,7 @@ namespace Ex03.GarageLogic
             return m_Vehicles[i_LicenseNumber];
         }
 
-        public void ChangeVehicleState(string i_LicenseNumber, eVehicleStatus i_Status) // 3
+        public void ChangeVehicleState(string i_LicenseNumber, eVehicleStatus i_Status)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
             m_CustomersInfo[i_LicenseNumber].VehicleStatus = i_Status;
         }
 
-        public void InflateWheelsToMax(string i_LicenseNumber) // 4
+        public void InflateWheelsToMax(string i_LicenseNumber)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
@@ -61,7 +61,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountOfFuel) // 5
+        public void FuelVehicle(string i_LicenseNumber, eFuelType i_FuelType, float i_AmountOfFuel)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
@@ -76,7 +76,7 @@ namespace Ex03.GarageLogic
             (m_Vehicles[i_LicenseNumber].Engine as FuelEngine).AddFuel(i_AmountOfFuel, i_FuelType);
         }
 
-        public void ChargeVehicle(string i_LicenseNumber, float i_MinutesToCharge) // 6
+        public void ChargeVehicle(string i_LicenseNumber, float i_MinutesToCharge)
         {
             if (!IsVehicleInGarage(i_LicenseNumber))
             {
@@ -91,7 +91,7 @@ namespace Ex03.GarageLogic
             (m_Vehicles[i_LicenseNumber].Engine as ElectricEngine).AddCharge(i_MinutesToCharge);
         }
 
-        public string VehicleInfoToString(string i_LicenseNumber) // 7
+        public string VehicleInfoToString(string i_LicenseNumber)
         {
             Vehicle currentVehicle;
             CustomerInfo currentCustomer;

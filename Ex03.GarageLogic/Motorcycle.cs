@@ -20,13 +20,10 @@ namespace Ex03.GarageLogic
         private eLicenseType m_LicenseType;
         private int m_EngineCapacity;
 
-        public Motorcycle()
+        public Motorcycle() : base(k_MaxMotorcycleFuel, k_MaxMotorcycleCharge, k_MaxMotorcycleWheelPressure)
         {
             NumOfWheels = k_NumberOfWheelsInMotorcycle;
-            MaxWheelPressure = k_MaxMotorcycleWheelPressure;
             FuelType = Enums.eFuelType.Octan98;
-            MaxFuel = k_MaxMotorcycleFuel;
-            MaxCharge = k_MaxMotorcycleCharge;
         }
 
         public override string GetSpecialAttributePrompt(string i_SpecialAttributeNumber)

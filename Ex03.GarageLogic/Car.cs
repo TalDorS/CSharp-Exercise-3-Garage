@@ -16,19 +16,16 @@ namespace Ex03.GarageLogic
         private const int k_MinNumOfDoors = 2;
         private const int k_MaxNumOfDoors = 5;
         private const int k_NumberOfWheelsInCar = 5;
+        private int m_NumOfDoors;
         private const float k_MaxCarWheelPressure = 31f;
         private const float k_MaxCarFuel = 45f;
         private const float k_MaxCarCharge = 3.5f;
         private eCarColor m_CarColor;
-        private int m_NumOfDoors;
 
-        public Car() 
+        public Car() : base(k_MaxCarFuel, k_MaxCarCharge, k_MaxCarWheelPressure)
         {
             NumOfWheels = k_NumberOfWheelsInCar;
-            MaxWheelPressure = k_MaxCarWheelPressure;
             FuelType = Enums.eFuelType.Octan95;
-            MaxFuel = k_MaxCarFuel;
-            MaxCharge = k_MaxCarCharge;
         }
 
         public override string GetSpecialAttributePrompt(string i_SpecialAttributeNumber)
@@ -62,12 +59,12 @@ namespace Ex03.GarageLogic
             {
                 case k_CarColor:
                     {
-                        this.SetCarColor(i_AttributeValue);
+                        this.setCarColor(i_AttributeValue);
                         break;
                     }
                 case k_NumberOfDoors:
                     {
-                        this.SetNumOfDoors(i_AttributeValue);
+                        this.setNumOfDoors(i_AttributeValue);
                         break;
                     }
                 default:
@@ -77,7 +74,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void SetNumOfDoors(string i_NumOfDoorsInput)
+        private void setNumOfDoors(string i_NumOfDoorsInput)
         {
             if(!int.TryParse(i_NumOfDoorsInput, out int o_NumOfDoors))
             {
@@ -92,7 +89,7 @@ namespace Ex03.GarageLogic
             m_NumOfDoors = o_NumOfDoors;
         }
 
-        public void SetCarColor(string i_CarColorInput)
+        private void setCarColor(string i_CarColorInput)
         {
             if (!int.TryParse(i_CarColorInput, out int o_CarColor))
             {

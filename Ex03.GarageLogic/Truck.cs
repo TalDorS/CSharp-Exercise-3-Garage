@@ -13,17 +13,15 @@ namespace Ex03.GarageLogic
         private const string k_CargoCapacity = "2";
         private const int k_NumberOfWheelsInTruck = 12;
         private const float k_MaxTruckWheelPressure = 28f;
-        private const float k_MaxCarFuel = 120f;
-        private const float k_MaxCarCharge = 3.5f;
+        private const float k_MaxTruckFuel = 120f;
+        private const float k_MaxTrucCharge = 3.5f;
         private bool m_IsDangerousMaterials;
         private float m_CargoCapacity;
 
-        public Truck()
+        public Truck() : base(k_MaxTruckFuel, k_MaxTrucCharge, k_MaxTruckWheelPressure)
         {
             NumOfWheels = k_NumberOfWheelsInTruck;
-            MaxWheelPressure = k_MaxTruckWheelPressure;
             FuelType = Enums.eFuelType.Soler;
-            MaxFuel = k_MaxCarFuel;
         }
 
         public override string GetSpecialAttributePrompt(string i_SpecialAttributeNumber)

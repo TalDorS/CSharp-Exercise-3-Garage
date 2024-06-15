@@ -17,6 +17,11 @@ namespace Ex03.GarageLogic
             r_MaxAmountOfEnergy = i_MaxAmountOfEnergy;
         }
 
+        public float PercentageOfEnergy
+        {
+            get { return ((m_CurrentEnergy) / (r_MaxAmountOfEnergy) * k_ToPercent); }
+        }
+
         public float MaxAmountOfEnergy
         {
             get { return r_MaxAmountOfEnergy; }
@@ -38,11 +43,6 @@ namespace Ex03.GarageLogic
             }
 
             m_CurrentEnergy = newEnergy;
-        }
-
-        public float PercentageOfEnergy
-        {
-            get { return ((m_CurrentEnergy)/(r_MaxAmountOfEnergy) * k_ToPercent); }
         }
     }
 }

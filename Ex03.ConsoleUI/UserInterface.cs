@@ -36,7 +36,7 @@ namespace Ex03.ConsoleUI
 1) Insert a vehicle
 2) Display a list of all licenses numbers currently avaliable in the garage
 3) Change the vehicle's state in garage
-4) Inflate wheels to the maximum 
+4) Inflate tyres to the maximum 
 5) Fuel vehicle (for fuel based vehicles)
 6) Charge vehicle (for electric vehicles)
 7) Display vehicle info
@@ -446,7 +446,7 @@ Please choose an option (1 to 4):";
             else
             {
                 Console.WriteLine("The grarge is currently empty.");
-                licenserNumber = null;
+                licenserNumber = string.Empty;
             }
 
             return licenserNumber;
@@ -481,6 +481,7 @@ Please choose an option (1 to 3): ";
             bool userWantToQuit;
 
             userWantToQuit = licenseNumber == string.Empty;
+
             if (!userWantToQuit && !m_Garage.IsGarageEmpty())
             {
                 m_Garage.InflateWheelsToMax(licenseNumber);
@@ -494,7 +495,9 @@ Please choose an option (1 to 3): ";
         private void fuelVehicle()
         {
             string licenseNumber = getLicenseNumberInGarage();
-            if (!m_Garage.IsGarageEmpty())
+            bool isEngineFuel = m_Garage.GetVehicleByLicenseNumber(licenseNumber).Engine is FuelEngine;
+
+            if (!m_Garage.IsGarageEmpty() && isEngineFuel)
             {
                 bool success = false;
                 string messageToPrint =
@@ -514,6 +517,7 @@ Please choose an option: ";
                         int fuelType = getAndValidateIntInRange(k_MinInputValue, k_NumOfFuelOptions, messageToPrint);
 
                         Console.WriteLine("How many liters of fuel would you want to add?");
+
                         amountOfFuel = getValidFloatNumber();
                         m_Garage.FuelVehicle(licenseNumber, (eFuelType)fuelType, amountOfFuel);
                         success = true; // Set success to true to exit the loop
@@ -536,11 +540,13 @@ Please choose an option: ";
             }
         }
 
+
         private void chargeVehicle()
         {
             string licenseNumber = getLicenseNumberInGarage();
+            bool isEngineElectric = m_Garage.GetVehicleByLicenseNumber(licenseNumber).Engine is ElectricEngine;
 
-            if (!m_Garage.IsGarageEmpty())
+            if (!m_Garage.IsGarageEmpty() && isEngineElectric)
             {
                 bool success = false;
 
@@ -550,8 +556,7 @@ Please choose an option: ";
                     try
                     {
                         float amountOfMinutesToCharge = getValidFloatNumber();
-
-                        m_Garage.ChargeVehicle(licenseNumber, (amountOfMinutesToCharge / 60));
+                        m_Garage.ChargeVehicle(licenseNumber, amountOfMinutesToCharge);
                         success = true;
                     }
                     catch (ArgumentException argumentException)
@@ -572,11 +577,12 @@ Please choose an option: ";
             }
         }
 
+
         private void showVehicleInfo()
         {
             string licenseNumber = getLicenseNumberInGarage();
-
-            if (!m_Garage.IsGarageEmpty() && licenseNumber != null)
+            bool isValidLicense = licenseNumber != string.Empty;
+            if (!m_Garage.IsGarageEmpty() && isValidLicense)
             {
                 Console.WriteLine(m_Garage.VehicleInfoToString(licenseNumber));
             }

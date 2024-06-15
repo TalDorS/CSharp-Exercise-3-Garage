@@ -13,6 +13,10 @@ namespace Ex03.GarageLogic
         private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
         private Dictionary<string, CustomerInfo> m_CustomersInfo = new Dictionary<string, CustomerInfo>();
 
+        public bool IsGarageEmpty()
+        {
+            return m_Vehicles.Count==0;
+        }
         public void InsertVehicleToGarage(Vehicle i_Vehicle, CustomerInfo i_ClientInfo)
         {
             m_Vehicles.Add(i_Vehicle.LicenseNumber, i_Vehicle);

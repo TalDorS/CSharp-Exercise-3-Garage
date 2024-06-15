@@ -180,9 +180,10 @@ The input should only contain digits, please try again: ");
         {
             StringBuilder licenseNumbersToPrint = new StringBuilder();
 
-            licenseNumbersToPrint.AppendLine("The current license numbers in the garage are: ");
             if (io_LicenseNumbers.Count != 0)
             {
+                licenseNumbersToPrint.AppendLine("The current license numbers in the garage are: ");
+
                 foreach (string licenseNumber in io_LicenseNumbers)
                 {
                     licenseNumbersToPrint.AppendLine(licenseNumber);
@@ -223,12 +224,12 @@ The input should only contain digits, please try again: ");
 Please enter the license number of the required vehicle: ");
             licenseNumber = getNonEmptyUserInput();
             //check if number exists then change the state and print a message 
-            if (m_Garage.IsVehicleInGarage(licenseNumber))// should be a method here to check is license plate already in system
+            if (m_Garage.IsVehicleInGarage(licenseNumber))
             {
                 string MessageToUser = string.Format(
 @"Vehicle with license number '{0}' is now changed to state: In Repairing",licenseNumber);
-                //update state of vehicle
                 Console.WriteLine(MessageToUser);
+                //update state of vehicle
                 m_Garage.ChangeVehicleState(licenseNumber, eVehicleStatus.InRepair);
                 promptUserToPressEnterToContinue();
             }
@@ -284,6 +285,7 @@ Please enter the license number of the required vehicle: ");
         private int getTypeOfVehicleNumber()//function to print all vehicle options and get the option from the user
         {
             StringBuilder messageToPrint = new StringBuilder();
+            string finalMessage;
             int currentLocation = 1;
             int maxInputValue = Enum.GetValues(typeof(eVehicleType)).Length;
 
@@ -296,7 +298,8 @@ Please enter the license number of the required vehicle: ");
                 currentLocation++;
             }
 
-            Console.WriteLine(messageToPrint);
+            finalMessage = messageToPrint.ToString().TrimEnd();
+            Console.WriteLine(finalMessage);
 
             return getAndValidateIntInRange(k_MinInputValue, maxInputValue);
         }
@@ -352,7 +355,7 @@ Please enter the license number of the required vehicle: ");
                 catch (ValueOutOfRangeException valueOutOfRange)
                 {
                     Console.WriteLine(valueOutOfRange.Message);
-                    promptUserToPressEnterToContinue();
+                    Console.WriteLine("Please try again.");
                 }
             }
         }
@@ -374,7 +377,7 @@ Please choose an option (1 to 4):";
 
             if (filterNumber >= maxInputValue)
             {
-                licenseNumbers = m_Garage.GetLicenseListByVehicleState(k_GetAllVehicles);//method tal needs to do
+                licenseNumbers = m_Garage.GetLicenseListByVehicleState(k_GetAllVehicles);
             }
             else
             {
@@ -422,19 +425,28 @@ Please choose an option (1 to 4):";
             licenserNumber = getNonEmptyUserInput();
             isUserNotDone = true;
             isLicenseNumberInGarage = m_Garage.IsVehicleInGarage(licenserNumber);
-            while (isUserNotDone && (!isLicenseNumberInGarage))
+            if (!m_Garage.IsGarageEmpty())
             {
-                Console.WriteLine("This vehicle is not in the garage currently");
-                isUserNotDone = isUserWantToCancel();
-                if (isUserNotDone == false)
+                while (isUserNotDone && (!isLicenseNumberInGarage))
                 {
-                    licenserNumber = string.Empty;
-                    break;
-                }
+                    Console.WriteLine("This vehicle is not in the garage currently");
 
-                Console.WriteLine("Try again: ");
-                licenserNumber = getNonEmptyUserInput();
-                isLicenseNumberInGarage = m_Garage.IsVehicleInGarage(licenserNumber);
+                    isUserNotDone = isUserWantToCancel();
+                    if (isUserNotDone == false)
+                    {
+                        licenserNumber = string.Empty;
+                        break;
+                    }
+
+                    Console.WriteLine("Try again: ");
+                    licenserNumber = getNonEmptyUserInput();
+                    isLicenseNumberInGarage = m_Garage.IsVehicleInGarage(licenserNumber);
+                }
+            }
+            else
+            {
+                Console.WriteLine("The grarge is currently empty.");
+                licenserNumber = null;
             }
 
             return licenserNumber;
@@ -443,16 +455,24 @@ Please choose an option (1 to 4):";
         private void changeVehicleStatus()
         {
             string licenseNumber = getLicenseNumberInGarage();
-            string messageToPrint =
-      @"The possible new states for the vehicle:
+            bool isVaildLicenseNumber = licenseNumber != null;
+
+            if (isVaildLicenseNumber)
+            {
+                string messageToPrint =
+          @"The possible new states for the vehicle:
 1) The vehicle is being repaired
 2) The vehicle repair is done
 3) Paid
 
 Please choose an option (1 to 3): ";
-            int userVehicleState = getAndValidateIntInRange(k_MinInputValue, k_NumOfVehicleTypes, messageToPrint);
-
-            m_Garage.ChangeVehicleState(licenseNumber, (eVehicleStatus)userVehicleState);
+                int userVehicleState = getAndValidateIntInRange(k_MinInputValue, k_NumOfVehicleTypes, messageToPrint);
+                m_Garage.ChangeVehicleState(licenseNumber, (eVehicleStatus)userVehicleState);
+            }
+            else
+            {
+                promptUserToPressEnterToContinue();
+            }
         }
 
         private void inflateWheelsToMax()
@@ -462,18 +482,24 @@ Please choose an option (1 to 3): ";
 
             userWantToQuit = licenseNumber == string.Empty;
 
-            if (!userWantToQuit)
+            if (!userWantToQuit && !m_Garage.IsGarageEmpty())
             {
                 m_Garage.InflateWheelsToMax(licenseNumber);
+            }
+            else
+            {
+                promptUserToPressEnterToContinue();
             }
         }
 
         private void fuelVehicle()
         {
             string licenseNumber = getLicenseNumberInGarage();
-            bool success = false;
-            string messageToPrint =
-        @"Please choose fuel type:
+            if (!m_Garage.IsGarageEmpty())
+            {
+                bool success = false;
+                string messageToPrint =
+            @"Please choose fuel type:
 1) Soler
 2) Octan 95
 3) Octan 96
@@ -481,56 +507,68 @@ Please choose an option (1 to 3): ";
 
 Please choose an option: ";
 
-            while (!success)
+                while (!success)
+                {
+                    try
+                    {
+                        float amountOfFuel;
+                        int fuelType = getAndValidateIntInRange(k_MinInputValue, k_NumOfFuelOptions, messageToPrint);
+
+                        Console.WriteLine("How many liters of fuel would you want to add?");
+
+                        amountOfFuel = getValidFloatNumber();
+                        m_Garage.FuelVehicle(licenseNumber, (eFuelType)fuelType, amountOfFuel);
+                        success = true; // Set success to true to exit the loop
+                    }
+                    catch (ArgumentException argumentException)
+                    {
+                        Console.WriteLine(argumentException.Message);
+                        promptUserToPressEnterToContinue();
+                    }
+                    catch (ValueOutOfRangeException valueOutOfRange)
+                    {
+                        Console.WriteLine(valueOutOfRange.Message);
+                        promptUserToPressEnterToContinue();
+                    }
+                }
+            }
+            else
             {
-                try
-                {
-                    float amountOfFuel;
-                    int fuelType = getAndValidateIntInRange(k_MinInputValue, k_NumOfFuelOptions, messageToPrint);
-
-                    Console.WriteLine("How many liters of fuel would you want to add?");
-
-                    amountOfFuel = getValidFloatNumber();
-                    m_Garage.FuelVehicle(licenseNumber, (eFuelType)fuelType, amountOfFuel);
-                    success = true; // Set success to true to exit the loop
-                }
-                catch (ArgumentException argumentException)
-                {
-                    Console.WriteLine(argumentException.Message);
-                    promptUserToPressEnterToContinue();
-                }
-                catch (ValueOutOfRangeException valueOutOfRange)
-                {
-                    Console.WriteLine(valueOutOfRange.Message);
-                    promptUserToPressEnterToContinue();
-                }
+                promptUserToPressEnterToContinue();
             }
         }
 
         private void chargeVehicle()
         {
             string licenseNumber = getLicenseNumberInGarage();
-            bool success = false;
-
-            while (!success)
+            if (!m_Garage.IsGarageEmpty())
             {
-                Console.WriteLine("How many minutes would you want to add? ");
-                try
+                bool success = false;
+
+                while (!success)
                 {
-                    float amountOfMinutesToCharge = getValidFloatNumber();
-                    m_Garage.ChargeVehicle(licenseNumber, amountOfMinutesToCharge);
-                    success = true; 
+                    Console.WriteLine("How many minutes would you want to add? ");
+                    try
+                    {
+                        float amountOfMinutesToCharge = getValidFloatNumber();
+                        m_Garage.ChargeVehicle(licenseNumber, amountOfMinutesToCharge);
+                        success = true;
+                    }
+                    catch (ArgumentException argumentException)
+                    {
+                        Console.WriteLine(argumentException.Message);
+                        promptUserToPressEnterToContinue();
+                    }
+                    catch (ValueOutOfRangeException valueOutOfRange)
+                    {
+                        Console.WriteLine(valueOutOfRange.Message);
+                        promptUserToPressEnterToContinue();
+                    }
                 }
-                catch (ArgumentException argumentException)
-                {
-                    Console.WriteLine(argumentException.Message);
-                    promptUserToPressEnterToContinue();
-                }
-                catch (ValueOutOfRangeException valueOutOfRange)
-                {
-                    Console.WriteLine(valueOutOfRange.Message);
-                    promptUserToPressEnterToContinue();
-                }
+            }
+            else
+            {
+                promptUserToPressEnterToContinue();
             }
         }
 
@@ -538,7 +576,11 @@ Please choose an option: ";
         {
             string licenseNumber = getLicenseNumberInGarage();
 
-            Console.WriteLine(m_Garage.VehicleInfoToString(licenseNumber));
+            if (!m_Garage.IsGarageEmpty())
+            {
+                Console.WriteLine(m_Garage.VehicleInfoToString(licenseNumber));
+            }
+
             promptUserToPressEnterToContinue();
         }
 
@@ -546,9 +588,10 @@ Please choose an option: ";
         {
             bool isExit = false;
 
-            Console.WriteLine("Welcome To Our Garage!");
             while (!isExit)
             {
+            Console.WriteLine("Welcome To Our Garage!");
+
                 switch (displayMenuAndGetUserInput())
                 {
                     case eUserAction.InsertVehicle:

@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
             {
                 case k_DangerousMaterials:
                     {
-                        attributeString = "Please enter if the truck is carrying dangerous materials: ";
+                        attributeString = "Please enter if the truck is carrying dangerous materials: (1 = Yes, 0 = No)";
                         break;
                     }
                 case k_CargoCapacity:
@@ -62,7 +62,7 @@ namespace Ex03.GarageLogic
                     }
                 case k_CargoCapacity:
                     {
-                        this.setCargoCapacity(i_AttributeNum);
+                        this.setCargoCapacity(i_AttributeValue);
                         break;
                     }
                 default:

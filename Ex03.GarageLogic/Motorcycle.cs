@@ -65,7 +65,7 @@ namespace Ex03.GarageLogic
                     }
                 case k_EngineCapacityString:
                     {
-                        this.setEngineCapacity(i_AttributeNum);
+                        this.setEngineCapacity(i_AttributeValue);
                         break;
                     }
                 default:

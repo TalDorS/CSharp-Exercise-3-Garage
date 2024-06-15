@@ -15,7 +15,7 @@ namespace Ex03.GarageLogic
 
         public bool IsGarageEmpty()
         {
-            return m_Vehicles.Count==0;
+            return m_Vehicles.Count == 0;
         }
         public void InsertVehicleToGarage(Vehicle i_Vehicle, CustomerInfo i_ClientInfo)
         {
@@ -105,10 +105,10 @@ namespace Ex03.GarageLogic
             currentCustomer = m_CustomersInfo[i_LicenseNumber];
 
             return string.Format(
-@"
-{0}
+@"{0}
 
-{1}",
+{1}
+",
 currentCustomer.ToString(), 
 currentVehicle.ToString());
         }

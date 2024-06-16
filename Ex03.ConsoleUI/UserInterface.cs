@@ -527,7 +527,7 @@ Please choose an option: ";
                     {
                         Console.WriteLine(argumentException.Message);
                         Console.WriteLine("Please try again.");
-                        promptUserToPressEnterToContinue();
+            promptUserToPressEnterToContinue();
                     }
                     catch (ValueOutOfRangeException valueOutOfRange)
                     {
@@ -603,10 +603,10 @@ Please choose an option: ";
         public void ManageGarage()
         {
             bool isExit = false;
+            Console.WriteLine("Welcome To Our Garage!");
 
             while (!isExit)
             {
-                Console.WriteLine("Welcome To Our Garage!");
                 switch (displayMenuAndGetUserInput())
                 {
                     case eUserAction.InsertVehicle:

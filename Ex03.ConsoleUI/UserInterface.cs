@@ -14,7 +14,6 @@ namespace Ex03.ConsoleUI
 {
     public class UserInterface
     {
-        //create a garage
         private Garage m_Garage = new Garage();
         private const int k_MinMenuOption = 1;
         private const int k_MaxMenuOption = 7;
@@ -30,7 +29,10 @@ namespace Ex03.ConsoleUI
 
         private eUserAction displayMenuAndGetUserInput()
         {
-            string menuToPrint = string.Format(
+            string menuToPrint;
+            int userChoice;
+
+            menuToPrint = string.Format(
                 @"The possible choices are:
 1) Insert a vehicle
 2) Display a list of all licenses numbers currently avaliable in the garage
@@ -41,8 +43,7 @@ namespace Ex03.ConsoleUI
 7) Display vehicle info
 
 Please choose an option: ({0} to {1})", k_MinMenuOption, k_MaxMenuOption);
-            int userChoice = getAndValidateIntInRange(k_MinMenuOption, k_MaxMenuOption, menuToPrint);
-
+            userChoice = getAndValidateIntInRange(k_MinMenuOption, k_MaxMenuOption, menuToPrint);
             Console.Clear();
 
             return (eUserAction)userChoice;
@@ -59,16 +60,18 @@ Please choose an option: ({0} to {1})", k_MinMenuOption, k_MaxMenuOption);
         {
             int inputNumber = -1;
             bool isValidInputNumber = false;
+            bool isNumberInRange;
+            string inputString;
+            bool isInputANumber;
 
             while (!isValidInputNumber)
             {
-                string inputString = getNonEmptyUserInput();
-                bool isInputANumber = int.TryParse(inputString, out inputNumber);
+                inputString = getNonEmptyUserInput();
+                isInputANumber = int.TryParse(inputString, out inputNumber);
 
                 if (isInputANumber)
                 {
-                    bool isNumberInRange = (inputNumber >= i_MinValue) && (inputNumber <= i_MaxValue);
-
+                    isNumberInRange = (inputNumber >= i_MinValue) && (inputNumber <= i_MaxValue);
                     isValidInputNumber = isNumberInRange;
                 }
 
@@ -88,17 +91,17 @@ Please enter a number from {0} to {1}", i_MinValue, i_MaxValue);
             float inputNumber = -1;
             bool isValidInputNumber = false;
             bool isANumber;
+            bool isNumberInRange;
+            string inputString;
 
             Console.WriteLine(i_Message);
             while (!isValidInputNumber)
             {
-                string inputString = getNonEmptyUserInput();
-
+                inputString = getNonEmptyUserInput();
                 isANumber = float.TryParse(inputString, out inputNumber);
                 if (isANumber)
                 {
-                    bool isNumberInRange = inputNumber >= i_MinNumber && inputNumber <= i_MaxNumber;
-
+                    isNumberInRange = inputNumber >= i_MinNumber && inputNumber <= i_MaxNumber;
                     isValidInputNumber = isNumberInRange;
                 }
 
@@ -210,12 +213,12 @@ The input should only contain digits, please try again: ");
         {
             float inputNumberFromUser;
             bool isANumberInput;
+            string inputFromUser;
 
             do
             {
-                string input = getNonEmptyUserInput();
-
-                isANumberInput = float.TryParse(input, out inputNumberFromUser);
+                inputFromUser = getNonEmptyUserInput();
+                isANumberInput = float.TryParse(inputFromUser, out inputNumberFromUser);
                 if (!isANumberInput)
                 {
                     Console.WriteLine("Invalid input, please try again: ");
@@ -229,12 +232,13 @@ The input should only contain digits, please try again: ");
         private void insertVehicle()
         {
             string licenseNumber;
+            string MessageToUser;
 
             Console.WriteLine(@"Please enter the license number of the required vehicle: ");
             licenseNumber = getNonEmptyUserInput();
             if (m_Garage.IsVehicleInGarage(licenseNumber))
             {
-                string MessageToUser = string.Format(
+                MessageToUser = string.Format(
 @"Vehicle with license number '{0}' has now changed to state: In Repairing", licenseNumber);
 
                 Console.WriteLine(MessageToUser);
@@ -245,6 +249,7 @@ The input should only contain digits, please try again: ");
             {
                 Vehicle newVehicle = createNewVehicle(licenseNumber);
                 CustomerInfo newCustomer = createNewCustomer();
+
                 m_Garage.InsertVehicleToGarage(newVehicle, newCustomer);
             }
         }
@@ -367,6 +372,7 @@ The input should only contain digits, please try again: ");
             int filterNumber;
             int maxInputValue = 4;
             int minInputValue = 1;
+            string licenseNumbersAsString = string.Empty;
             string messageToPrint =
 @"How would you like to filter the results:
 1) Being repaired
@@ -375,7 +381,6 @@ The input should only contain digits, please try again: ");
 4) No filter
 
 Please choose an option (1 to 4):";
-            string licenseNumbersAsString = string.Empty;
 
             filterNumber = getAndValidateIntInRange(minInputValue, maxInputValue, messageToPrint);
             if (filterNumber >= maxInputValue)
@@ -516,16 +521,18 @@ Please choose an option: ";
                         Console.WriteLine("How many liters of fuel would you want to add?");
                         amountOfFuel = getValidFloatNumber();
                         m_Garage.FuelVehicle(licenseNumber, (eFuelType)fuelType, amountOfFuel);
-                        success = true; // Set success to true to exit the loop
+                        success = true;
                     }
                     catch (ArgumentException argumentException)
                     {
                         Console.WriteLine(argumentException.Message);
+                        Console.WriteLine("Please try again.");
                         promptUserToPressEnterToContinue();
                     }
                     catch (ValueOutOfRangeException valueOutOfRange)
                     {
                         Console.WriteLine(valueOutOfRange.Message);
+                        Console.WriteLine("Please try again.");
                         promptUserToPressEnterToContinue();
                     }
                 }
@@ -563,11 +570,13 @@ Please choose an option: ";
                     catch (ArgumentException argumentException)
                     {
                         Console.WriteLine(argumentException.Message);
+                        Console.WriteLine("Please try again.");
                         promptUserToPressEnterToContinue();
                     }
                     catch (ValueOutOfRangeException valueOutOfRange)
                     {
                         Console.WriteLine(valueOutOfRange.Message);
+                        Console.WriteLine("Please try again.");
                         promptUserToPressEnterToContinue();
                     }
                 }

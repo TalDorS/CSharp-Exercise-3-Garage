@@ -16,10 +16,10 @@ namespace Ex03.GarageLogic
         private const int k_MinNumOfDoors = 2;
         private const int k_MaxNumOfDoors = 5;
         private const int k_NumberOfWheelsInCar = 5;
-        private int m_NumOfDoors;
         private const float k_MaxCarWheelPressure = 31f;
         private const float k_MaxCarFuel = 45f;
         private const float k_MaxCarCharge = 3.5f;
+        private int m_NumOfDoors;
         private eCarColor m_CarColor;
 
         public Car() : base(k_MaxCarFuel, k_MaxCarCharge, k_MaxCarWheelPressure)

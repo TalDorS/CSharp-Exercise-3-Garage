@@ -603,6 +603,7 @@ Please choose an option: ";
         public void ManageGarage()
         {
             bool isExit = false;
+
             Console.WriteLine("Welcome To Our Garage!");
 
             while (!isExit)

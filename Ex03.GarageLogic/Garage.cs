@@ -10,8 +10,8 @@ namespace Ex03.GarageLogic
     public class Garage
     {
         private const int k_GetAll = -1;
-        private Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
-        private Dictionary<string, CustomerInfo> m_CustomersInfo = new Dictionary<string, CustomerInfo>();
+        private readonly Dictionary<string, Vehicle> m_Vehicles = new Dictionary<string, Vehicle>();
+        private readonly Dictionary<string, CustomerInfo> m_CustomersInfo = new Dictionary<string, CustomerInfo>();
 
         public bool IsGarageEmpty()
         {

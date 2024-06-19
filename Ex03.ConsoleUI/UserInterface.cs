@@ -240,7 +240,6 @@ The input should only contain digits, please try again: ");
             {
                 MessageToUser = string.Format(
 @"Vehicle with license number '{0}' has now changed to state: In Repairing", licenseNumber);
-
                 Console.WriteLine(MessageToUser);
                 r_Garage.ChangeVehicleState(licenseNumber, eVehicleStatus.InRepair);
                 promptUserToPressEnterToContinue();

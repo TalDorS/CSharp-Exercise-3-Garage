@@ -115,17 +115,16 @@ Please enter a number from {0} to {1}: ", i_MinNumber, i_MaxNumber));
             return inputNumber;
         }
 
-        private string getNonEmptyUserInput(string i_MessageForUser)
+        private string getNonEmptyUserInput(string i_MessageForUser = k_EmptyString)
         {
-            Console.WriteLine(i_MessageForUser);
+            string userInput;
 
-            return getNonEmptyUserInput();
-        }
+            if (!string.IsNullOrEmpty(i_MessageForUser))
+            {
+                Console.WriteLine(i_MessageForUser);
+            }
 
-        private string getNonEmptyUserInput()
-        {
-            string userInput = Console.ReadLine();
-
+            userInput = Console.ReadLine();
             while (userInput == string.Empty)
             {
                 Console.Write(Environment.NewLine);
@@ -156,16 +155,9 @@ Please insert a new input");
             return spacedString;
         }
 
-        private string getOnlyDigitsString(string i_Message)
+        private string getOnlyDigitsString(string i_MessageForUser = k_EmptyString)
         {
-            Console.WriteLine(i_Message);
-
-            return getOnlyDigitsString();
-        }
-
-        private string getOnlyDigitsString()
-        {
-            string userInput = getNonEmptyUserInput();
+            string userInput = getNonEmptyUserInput(i_MessageForUser);
 
             while (!isOnlyDigitInString(userInput))
             {

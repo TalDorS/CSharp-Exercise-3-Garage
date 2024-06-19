@@ -552,6 +552,7 @@ Please choose an option: ";
         {
             string licenseNumber = getLicenseNumberInGarage();
             bool userWantToQuit = licenseNumber == string.Empty;
+
             if (!userWantToQuit)
             {
                 bool isEngineElectric = r_Garage.GetVehicleByLicenseNumber(licenseNumber).Engine is ElectricEngine;

@@ -492,18 +492,22 @@ Please choose an option (1 to 3): ";
         private void fuelVehicle()
         {
             string licenseNumber = getLicenseNumberInGarage();
-            bool isEngineFuel = r_Garage.GetVehicleByLicenseNumber(licenseNumber).Engine is FuelEngine;
+            bool userWantToQuit = licenseNumber == string.Empty;
 
-            if (!isEngineFuel)
+            if (!userWantToQuit)
             {
-                Console.WriteLine("The vehicle is an electric vehicle, you can't fuel it");
-            }
+                bool isEngineFuel = r_Garage.GetVehicleByLicenseNumber(licenseNumber).Engine is FuelEngine;
 
-            if (!r_Garage.IsGarageEmpty() && isEngineFuel)
-            {
-                bool success = false;
-                string messageToPrint =
-            @"Please choose fuel type:
+                if (!isEngineFuel)
+                {
+                    Console.WriteLine("The vehicle is an electric vehicle, you can't fuel it");
+                }
+
+                if (!r_Garage.IsGarageEmpty() && isEngineFuel)
+                {
+                    bool success = false;
+                    string messageToPrint =
+                @"Please choose fuel type:
 1) Soler
 2) Octan 95
 3) Octan 96
@@ -511,29 +515,30 @@ Please choose an option (1 to 3): ";
 
 Please choose an option: ";
 
-                while (!success)
-                {
-                    try
+                    while (!success)
                     {
-                        float amountOfFuel;
-                        int fuelType = getAndValidateIntInRange(k_MinInputValue, k_NumOfFuelOptions, messageToPrint);
+                        try
+                        {
+                            float amountOfFuel;
+                            int fuelType = getAndValidateIntInRange(k_MinInputValue, k_NumOfFuelOptions, messageToPrint);
 
-                        Console.WriteLine("How many liters of fuel would you want to add?");
-                        amountOfFuel = getValidFloatNumber();
-                        r_Garage.FuelVehicle(licenseNumber, (eFuelType)fuelType, amountOfFuel);
-                        success = true;
-                    }
-                    catch (ArgumentException argumentException)
-                    {
-                        Console.WriteLine(argumentException.Message);
-                        Console.WriteLine("Please try again.");
-            promptUserToPressEnterToContinue();
-                    }
-                    catch (ValueOutOfRangeException valueOutOfRange)
-                    {
-                        Console.WriteLine(valueOutOfRange.Message);
-                        Console.WriteLine("Please try again.");
-                        promptUserToPressEnterToContinue();
+                            Console.WriteLine("How many liters of fuel would you want to add?");
+                            amountOfFuel = getValidFloatNumber();
+                            r_Garage.FuelVehicle(licenseNumber, (eFuelType)fuelType, amountOfFuel);
+                            success = true;
+                        }
+                        catch (ArgumentException argumentException)
+                        {
+                            Console.WriteLine(argumentException.Message);
+                            Console.WriteLine("Please try again.");
+                            promptUserToPressEnterToContinue();
+                        }
+                        catch (ValueOutOfRangeException valueOutOfRange)
+                        {
+                            Console.WriteLine(valueOutOfRange.Message);
+                            Console.WriteLine("Please try again.");
+                            promptUserToPressEnterToContinue();
+                        }
                     }
                 }
             }
@@ -546,38 +551,42 @@ Please choose an option: ";
         private void chargeVehicle()
         {
             string licenseNumber = getLicenseNumberInGarage();
-            bool isEngineElectric = r_Garage.GetVehicleByLicenseNumber(licenseNumber).Engine is ElectricEngine;
-
-            if (!isEngineElectric)
+            bool userWantToQuit = licenseNumber == string.Empty;
+            if (!userWantToQuit)
             {
-                Console.WriteLine("The vehicle is a fuel based vehicle, you can't charge it");
-            }
+                bool isEngineElectric = r_Garage.GetVehicleByLicenseNumber(licenseNumber).Engine is ElectricEngine;
 
-            if (!r_Garage.IsGarageEmpty() && isEngineElectric)
-            {
-                bool success = false;
-
-                while (!success)
+                if (!isEngineElectric)
                 {
-                    Console.WriteLine("How many minutes would you want to add? ");
-                    try
-                    {
-                        float amountOfMinutesToCharge = getValidFloatNumber();
+                    Console.WriteLine("The vehicle is a fuel based vehicle, you can't charge it");
+                }
 
-                        r_Garage.ChargeVehicle(licenseNumber, amountOfMinutesToCharge / k_ConvertMinutesToHours);
-                        success = true;
-                    }
-                    catch (ArgumentException argumentException)
+                if (!r_Garage.IsGarageEmpty() && isEngineElectric)
+                {
+                    bool success = false;
+
+                    while (!success)
                     {
-                        Console.WriteLine(argumentException.Message);
-                        Console.WriteLine("Please try again.");
-                        promptUserToPressEnterToContinue();
-                    }
-                    catch (ValueOutOfRangeException valueOutOfRange)
-                    {
-                        Console.WriteLine(valueOutOfRange.Message);
-                        Console.WriteLine("Please try again.");
-                        promptUserToPressEnterToContinue();
+                        Console.WriteLine("How many minutes would you want to add? ");
+                        try
+                        {
+                            float amountOfMinutesToCharge = getValidFloatNumber();
+
+                            r_Garage.ChargeVehicle(licenseNumber, amountOfMinutesToCharge / k_ConvertMinutesToHours);
+                            success = true;
+                        }
+                        catch (ArgumentException argumentException)
+                        {
+                            Console.WriteLine(argumentException.Message);
+                            Console.WriteLine("Please try again.");
+                            promptUserToPressEnterToContinue();
+                        }
+                        catch (ValueOutOfRangeException valueOutOfRange)
+                        {
+                            Console.WriteLine(valueOutOfRange.Message);
+                            Console.WriteLine("Please try again.");
+                            promptUserToPressEnterToContinue();
+                        }
                     }
                 }
             }

@@ -27,6 +27,8 @@ namespace Ex03.ConsoleUI
         private const char k_LowercaseThreshold = 'a';
         private const string k_FirstSpecialAttribute = "1";
         private const string k_SecondSpecialAttribute = "2";
+        private const string k_EmptyString = "";
+
 
         private eUserAction displayMenuAndGetUserInput()
         {
@@ -50,20 +52,18 @@ Please choose an option: ({0} to {1})", k_MinMenuOption, k_MaxMenuOption);
             return (eUserAction)userChoice;
         }
 
-        private int getAndValidateIntInRange(int i_MinValue, int i_MaxValue, string i_MessageForUser)
-        {
-            Console.WriteLine(i_MessageForUser);
-
-            return getAndValidateIntInRange(i_MinValue, i_MaxValue);
-        }
-
-        private int getAndValidateIntInRange(int i_MinValue, int i_MaxValue)
+        private int getAndValidateIntInRange(int i_MinValue, int i_MaxValue, string i_MessageForUser = k_EmptyString)
         {
             int inputNumber = -1;
             bool isValidInputNumber = false;
             bool isNumberInRange;
             string inputString;
             bool isInputANumber;
+
+            if (!string.IsNullOrEmpty(i_MessageForUser))
+            {
+                Console.WriteLine(i_MessageForUser);
+            }
 
             while (!isValidInputNumber)
             {

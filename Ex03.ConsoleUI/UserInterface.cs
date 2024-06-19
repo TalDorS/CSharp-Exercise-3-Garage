@@ -15,6 +15,7 @@ namespace Ex03.ConsoleUI
     public class UserInterface
     {
         private readonly Garage r_Garage = new Garage();
+        private const int k_ConvertMinutesToHours = 60;
         private const int k_MinMenuOption = 1;
         private const int k_MaxMenuOption = 7;
         private const int k_MaxAmoutOfDoors = 5;
@@ -563,7 +564,7 @@ Please choose an option: ";
                     {
                         float amountOfMinutesToCharge = getValidFloatNumber();
 
-                        r_Garage.ChargeVehicle(licenseNumber, amountOfMinutesToCharge);
+                        r_Garage.ChargeVehicle(licenseNumber, amountOfMinutesToCharge / k_ConvertMinutesToHours);
                         success = true;
                     }
                     catch (ArgumentException argumentException)

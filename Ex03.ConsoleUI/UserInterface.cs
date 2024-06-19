@@ -240,7 +240,6 @@ The input should only contain digits, please try again: ");
             {
                 MessageToUser = string.Format(
 @"Vehicle with license number '{0}' has now changed to state: In Repairing", licenseNumber);
-
                 Console.WriteLine(MessageToUser);
                 r_Garage.ChangeVehicleState(licenseNumber, eVehicleStatus.InRepair);
                 promptUserToPressEnterToContinue();
@@ -501,6 +500,7 @@ Please choose an option (1 to 3): ";
                 if (!isEngineFuel)
                 {
                     Console.WriteLine("The vehicle is an electric vehicle, you can't fuel it");
+                    promptUserToPressEnterToContinue();
                 }
 
                 if (!r_Garage.IsGarageEmpty() && isEngineFuel)
@@ -560,6 +560,7 @@ Please choose an option: ";
                 if (!isEngineElectric)
                 {
                     Console.WriteLine("The vehicle is a fuel based vehicle, you can't charge it");
+                    promptUserToPressEnterToContinue();
                 }
 
                 if (!r_Garage.IsGarageEmpty() && isEngineElectric)

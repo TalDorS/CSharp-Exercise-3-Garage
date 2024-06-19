@@ -72,12 +72,12 @@ namespace Ex03.GarageLogic
 
         private void setDangerousMaterials(string i_DangerousMaterialsInput)
         {
-            if (!int.TryParse(i_DangerousMaterialsInput, out int o_DangerousMaterials))
+            if (!int.TryParse(i_DangerousMaterialsInput, out int dangerousMaterials))
             {
                 throw new FormatException("Invalid input! can only accept integers");
             }
 
-            switch (o_DangerousMaterials)
+            switch (dangerousMaterials)
             {
                 case 0:
                     m_IsDangerousMaterials = false;
@@ -92,17 +92,17 @@ namespace Ex03.GarageLogic
 
         private void setCargoCapacity(string i_CargoCapacityInput)
         {
-            if (!float.TryParse(i_CargoCapacityInput, out float o_CargoCapacity))
+            if (!float.TryParse(i_CargoCapacityInput, out float cargoCapacity))
             {
                 throw new FormatException("Invalid input! can only accept integers");
             }
 
-            if (o_CargoCapacity < 0)
+            if (cargoCapacity < 0)
             {
                 throw new ArgumentException("Cargo capacity cannot be negative!");
             }
 
-            m_CargoCapacity = o_CargoCapacity;
+            m_CargoCapacity = cargoCapacity;
         }
 
         public override string GetSpecialAttributesString()

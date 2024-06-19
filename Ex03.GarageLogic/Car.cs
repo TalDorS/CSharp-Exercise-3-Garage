@@ -76,32 +76,32 @@ namespace Ex03.GarageLogic
 
         private void setNumOfDoors(string i_NumOfDoorsInput)
         {
-            if(!int.TryParse(i_NumOfDoorsInput, out int o_NumOfDoors))
+            if(!int.TryParse(i_NumOfDoorsInput, out int numOfDoors))
             {
                 throw new FormatException("Invalid input! can only accept integers");
             }
 
-            if(o_NumOfDoors < k_MinNumOfDoors || o_NumOfDoors > k_MaxNumOfDoors)
+            if(numOfDoors < k_MinNumOfDoors || numOfDoors > k_MaxNumOfDoors)
             {
                 throw new ValueOutOfRangeException(k_MinNumOfDoors, k_MaxNumOfDoors);
             }
 
-            m_NumOfDoors = o_NumOfDoors;
+            m_NumOfDoors = numOfDoors;
         }
 
         private void setCarColor(string i_CarColorInput)
         {
-            if (!int.TryParse(i_CarColorInput, out int o_CarColor))
+            if (!int.TryParse(i_CarColorInput, out int carColor))
             {
                 throw new FormatException("Invalid input! can only accept integers");
             }
 
-            if (o_CarColor < k_MinColorNum || o_CarColor > k_MaxColorNum)
+            if (carColor < k_MinColorNum || carColor > k_MaxColorNum)
             {
                 throw new ValueOutOfRangeException(k_MinColorNum, k_MaxColorNum);
             }
 
-            m_CarColor = (eCarColor)o_CarColor;
+            m_CarColor = (eCarColor)carColor;
         }
 
         public override string GetSpecialAttributesString()

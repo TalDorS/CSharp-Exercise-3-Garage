@@ -74,32 +74,32 @@ namespace Ex03.GarageLogic
 
         private void setLicenseType(string i_LicenseInput)
         {
-            if (!int.TryParse(i_LicenseInput, out int o_LicenseInput))
+            if (!int.TryParse(i_LicenseInput, out int licenseInput))
             {
                 throw new FormatException("Invalid input! can only accept integers");
             }
 
-            if (o_LicenseInput < k_MinLicenseNum || o_LicenseInput > k_MaxLicenseNum)
+            if (licenseInput < k_MinLicenseNum || licenseInput > k_MaxLicenseNum)
             {
                 throw new ValueOutOfRangeException(k_MinLicenseNum, k_MaxLicenseNum);
             }
 
-            m_LicenseType = (eLicenseType)o_LicenseInput;
+            m_LicenseType = (eLicenseType)licenseInput;
         }
 
         private void setEngineCapacity(string i_EngineCapacity)
         {
-            if (!int.TryParse(i_EngineCapacity, out int o_EngineCapacity))
+            if (!int.TryParse(i_EngineCapacity, out int engineCapacity))
             {
                 throw new FormatException("Invalid input! can only accept integers");
             }
 
-            if (o_EngineCapacity < 0)
+            if (engineCapacity < 0)
             {
                 throw new ArgumentException("Engine capacity cannot be negative!");
             }
 
-            m_EngineCapacity = o_EngineCapacity;
+            m_EngineCapacity = engineCapacity;
         }
 
         public override string GetSpecialAttributesString()

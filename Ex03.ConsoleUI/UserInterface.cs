@@ -159,7 +159,7 @@ Please insert a new input");
         {
             string userInput = getNonEmptyUserInput(i_MessageForUser);
 
-            while (!isOnlyDigitInString(userInput))
+            while (!userInput.All(Char.IsDigit))
             {
                 Console.WriteLine(@"Invalid input
 The input should only contain digits, please try again: ");
@@ -167,11 +167,6 @@ The input should only contain digits, please try again: ");
             }
 
             return userInput;
-        }
-
-        private bool isOnlyDigitInString(string i_UserInput)
-        {
-            return i_UserInput.All(Char.IsDigit);
         }
 
         private void promptUserToPressEnterToContinue()
